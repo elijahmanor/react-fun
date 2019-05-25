@@ -1,0 +1,32 @@
+.Background {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.Tablar-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+
+.Tablar-time span:first-child {
+  font-size: 7rem;
+  line-height: 7rem;
+}
+
+.Tablar-time span:last-child {
+  font-size: 2rem;
+  line-height: 2rem;
+}
+
+.Tablar-message {
+  font-size: 3rem;
+  margin: 1rem 0;
+  cursor: pointer;
+}
