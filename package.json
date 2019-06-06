@@ -11,5 +11,6 @@
     "latest": "yarn upgrade-interactive --latest && yarn upgrade -L"
   },
   "devDependencies": {},
-  "private": true
+  "private": true,
+  "dependencies": {}
 }

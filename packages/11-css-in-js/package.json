@@ -1,11 +1,23 @@
 {
-  "name": "05-custom-hook",
+  "name": "11-css-in-js",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "^10.0.10",
+    "@emotion/styled": "^10.0.11",
+    "@reach/dialog": "^0.2.8",
+    "@testing-library/react": "^8.0.1",
+    "@welldone-software/why-did-you-render": "^3.0.9",
+    "classnames": "^2.2.6",
+    "greeting-time": "^1.0.0",
+    "jest-dom": "^3.4.0",
+    "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-hotkeys-hook": "^1.3.4",
+    "react-scripts": "3.0.1",
+    "react-spring": "^8.0.20",
+    "use-dark-mode": "^2.3.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -27,5 +39,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {}
 }

@@ -1,5 +1,5 @@
 {
-  "name": "01-base",
+  "name": "03-new-tab-extension",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
