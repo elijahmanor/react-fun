@@ -1,0 +1,186 @@
+# JSX
+
+Wouldn't it be nice if you didn't have to write and nest out all of that JavaScript like the following code snippet? Well, that's were JSX comes into play.
+
+```jsx
+function Ball() {
+  return React.createElement(
+    "div",
+    {
+      title: name,
+      className: "Ball"
+    },
+    React.createElement("span", null, "1")
+  );
+}
+ReactDOM.render(React.createElement(Ball), document.getElementById("app"));
+```
+
+JSX provides a nice succient way to represent the above structure. It's XML based and should look very familiar to what you might expect from HTML.
+
+```jsx
+function Ball() {
+  return (
+    <div className="Ball">
+      <span>1</span>
+    </div>
+  );
+}
+ReactDOM.render(<Ball />, document.getElementById("app"));
+```
+
+Doesn't the look much better? Well, normally you would need a build step to convert JSX to the desired JavaScript output,
+but for testing purposes you can add the standalone `babel` script and add a `type="text/babel"` attribute to your `<script>` tag.
+
+```html
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+  /* ... */
+</script>
+```
+
+To see what this is doing, you can visit https://babeljs.io/repl and paste the above JSX snippet to see the conversion in action.
+
+Now that things are a bit simplier, let's spice this up a little and have some fun.
+
+## You must import React
+
+Since JSX is converted to React.createElement calls, you must have React in scope. So, get in the habbit of importing or requiring React in your files.
+
+```javascript
+```
+
+## When is JSX Used?
+
+You typicaly see JSX used in the return of a function component or in the render method of a class component.
+The following 4 components are equivalent and you could see something like that in the wild.
+
+```jsx
+function Component1() {
+  return <h1>Hello, World!</h1>;
+}
+const Component2 = () => {
+  return <h1>Hello, World!</h1>;
+};
+const Component3 = () => <h1>Hello, World!</h1>;
+class Component4 extends React.Component {
+  render() {
+    return <h1>Hello, World!</h1>;
+  }
+}
+```
+
+## Injecting Dynamic Values
+
+```jsx
+function MyComponent(props) {
+  return <h1>Hello, {props.name}!</h1>;
+}
+```
+
+## You can also inject JSX into JSX
+
+```jsx
+function MyComponent(props) {
+  const strongName = <strong>{props.name}</strong>;
+  return <h1>Hello, {strongName}!</h1>;
+}
+```
+
+## Expression Curly Braces
+
+You can really put any JavaScript expression inside of JSX
+
+```jsx
+function MyComponent(props) {
+  return (
+    <h1>
+      {props.name ? (
+        <span>
+          Hello, <strong>{props.name}</strong>!
+        </span>
+      ) : (
+        <span>Welcome</span>
+      )}
+    </h1>
+  );
+}
+```
+
+```jsx
+function MyComponent(props) {
+  return <h1 title={props.name}>Hello, {props.name}!</h1>;
+}
+```
+
+## Style is an Object
+
+```jsx
+function MyComponent(props) {
+  return (
+    <h1 style={{ backgroundColor: "black", color: "white" }}>
+      Hello, {props.name}!
+    </h1>
+  );
+}
+```
+
+## `class` is `className`
+
+```jsx
+```
+
+## Okay, so let's have some fun...
+
+```jsx
+// npx how-2 -l javascript random hex color
+function Ball(props) {
+    const color = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+    return (
+        <div className="Ball" style={{backgroundColor: color}}>
+        <span>{props.index}</span>
+        </div>
+    );
+}
+const balls = [...Array(10)].map( (_, i) => <Ball index={i} />)
+ReactDOM.render(
+    <main>{ balls }</main>,
+    document.getElementById("app")
+);
+</script>
+```
+
+NOTE: Fill out more gaps from https://reactjs.org/docs/jsx-in-depth.html
+https://gist.github.com/delibytes/5b4f480427b9e7a923f7a313e58aaca8
+https://frontarm.com/james-k-nelson/jsx-live-cheatsheet/
+
+## Spreading props
+
+```jsx
+```
+
+## Comments
+
+```jsx
+```
+
+## JSX Prevents XSS
+
+```jsx
+```
+
+## Fragments
+
+```
+
+```
+
+## Conditional Rendering
+
+```
+
+```
+
+## Dot Notation
+
+## Capitalize Custom Components

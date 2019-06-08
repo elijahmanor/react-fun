@@ -1,0 +1,102 @@
+# React Sans Build
+
+## First Hello, World! App
+
+Inside your `<head>` element add the main `react` and `react-dom` scripts from `unpkg.com`.
+
+https://runpkg.com/
+
+```html
+<script
+  src="https://unpkg.com/react@16/umd/react.development.js"
+  crossorigin
+></script>
+<script
+  src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+  crossorigin
+></script>
+```
+
+Now, inside of the `<body>` tag add a `<div>` element with `id` of `app`.
+
+```html
+<div id="app"></div>
+<script>
+  ReactDOM.render(
+    React.createElement("h1", null, "Hello, World!"),
+    document.getElementById("app")
+  );
+</script>
+```
+
+If you'd prefer you could pull out the script into another file to isolate what you are editing...
+
+```html
+<script src="./script.js"></script>
+```
+
+You can fork this glitch to get setup if you'd like to follow along... https://glitch.com/edit/#!/funky-gum
+
+## Making things slightly Dynamic
+
+You can start to make the contents dynamic using several techniques.
+
+```javascript
+const name = "Elijah";
+ReactDOM.render(
+  React.createElement("h1", null, `Hello, ${name}!`),
+  document.getElementById("app")
+);
+```
+
+```javascript
+const name = "Elijah";
+ReactDOM.render(
+  React.createElement("h1", null, "Hello, ", name, "!"),
+  document.getElementById("app")
+);
+```
+
+```javascript
+const name = "Elijah";
+ReactDOM.render(
+  React.createElement(
+    "div",
+    {
+      title: name,
+      className: "Ball"
+    },
+    "1"
+  ),
+  document.getElementById("app")
+);
+```
+
+```javascript
+const name = "Elijah";
+ReactDOM.render(
+  React.createElement(
+    "div",
+    {
+      title: name,
+      className: "Ball"
+    },
+    React.createElement("span", null, "1")
+  ),
+  document.getElementById("app")
+);
+```
+
+```javascript
+function Ball() {
+  return React.createElement(
+    "div",
+    {
+      title: name,
+      className: "Ball"
+    },
+    React.createElement("span", null, "1")
+  );
+}
+ReactDOM.render(React.createElement(Ball), document.getElementById("app"));
+```
