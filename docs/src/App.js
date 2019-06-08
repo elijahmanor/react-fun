@@ -17,6 +17,7 @@ import { Router, Link, navigate } from "@reach/router";
 import "prism-themes/themes/prism-darcula.css";
 
 const drawerWidth = 240;
+const basepath = window.location.pathname;
 
 const NAVIGATION = [
   {
@@ -144,7 +145,7 @@ function ResponsiveDrawer(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Router basepath="/" primary={false}>
+        <Router basepath={basepath} primary={false}>
           {NAVIGATION.map(({ Component, path }) => (
             <Component path={path} />
           ))}
