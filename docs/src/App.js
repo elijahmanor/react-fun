@@ -140,7 +140,7 @@ function ResponsiveDrawer(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Router primary={false}>
+        <Router basepath="/react-fun" primary={false}>
           {NAVIGATION.map(({ Component, path }) => (
             <Component path={path} />
           ))}

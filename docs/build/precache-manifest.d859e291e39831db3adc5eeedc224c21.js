@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4b9d15832b5b972bff85e218cc4bd825",
+    "revision": "61f5732cf10092e5b74562f70c2e302a",
     "url": "/react-fun/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-fun/static/css/2.9f6f48a5.chunk.css"
   },
   {
-    "revision": "aaa5d1881ba8813c6419",
+    "revision": "19942c5b89f3c65aa890",
     "url": "/react-fun/static/css/main.34de6062.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-fun/static/js/2.bb6dbeba.chunk.js"
   },
   {
-    "revision": "aaa5d1881ba8813c6419",
-    "url": "/react-fun/static/js/main.10a4cd78.chunk.js"
+    "revision": "19942c5b89f3c65aa890",
+    "url": "/react-fun/static/js/main.2e5032c9.chunk.js"
   },
   {
     "revision": "b15777ebc3c0fa2fa71a",
