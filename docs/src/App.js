@@ -19,7 +19,11 @@ import "prism-themes/themes/prism-darcula.css";
 const drawerWidth = 240;
 
 const NAVIGATION = [
-  { text: "Home", Component: require("./mdx/Home.mdx").default, path: "/" },
+  {
+    text: "Home",
+    Component: require("./mdx/Home.mdx").default,
+    path: "/"
+  },
   {
     text: "What is React?",
     Component: require("./mdx/WhatIsReact.mdx").default,
@@ -140,7 +144,7 @@ function ResponsiveDrawer(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Router basepath="/react-fun" primary={false}>
+        <Router basepath="/" primary={false}>
           {NAVIGATION.map(({ Component, path }) => (
             <Component path={path} />
           ))}
