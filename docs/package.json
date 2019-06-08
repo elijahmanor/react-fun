@@ -2,6 +2,7 @@
   "name": "react-fun-docs",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://elijahmanor.com/react-fun",
   "dependencies": {
     "@babel/core": "7.4.3",
     "@mapbox/rehype-prism": "^0.3.1",
