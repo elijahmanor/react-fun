@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,7 +13,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { Router, Link, navigate } from "@reach/router";
+// import { Router, Link, navigate } from "@reach/router";
 import "prism-themes/themes/prism-darcula.css";
 
 const drawerWidth = 240;
@@ -23,7 +23,7 @@ const NAVIGATION = [
   {
     text: "Home",
     Component: require("./mdx/Home.mdx").default,
-    path: "/"
+    path: "home"
   },
   {
     text: "What is React?",
@@ -75,6 +75,8 @@ function ResponsiveDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [currentPage, setCurrentPage] = useState("home");
+  const Component = NAVIGATION.find(n => n.path === currentPage).Component;
 
   function handleDrawerToggle() {
     setMobileOpen(!mobileOpen);
@@ -86,7 +88,14 @@ function ResponsiveDrawer(props) {
       <Divider />
       <List>
         {NAVIGATION.map(({ text, path }, index) => (
-          <ListItem button key={text} onClick={() => navigate(path)}>
+          <ListItem
+            button
+            key={text}
+            onClick={() => {
+              // navigate(path);
+              setCurrentPage(path);
+            }}
+          >
             <ListItemText primary={text} />
           </ListItem>
         ))}
@@ -145,11 +154,12 @@ function ResponsiveDrawer(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Router basepath={basepath} primary={false}>
+        <Component />
+        {/* <Router basepath={basepath} primary={false}>
           {NAVIGATION.map(({ Component, path }) => (
             <Component path={path} />
           ))}
-        </Router>
+        </Router> */}
       </main>
     </div>
   );
