@@ -22,7 +22,7 @@ const NAVIGATION = [
   {
     text: "Home",
     Component: require("./mdx/Home.mdx").default,
-    path: "/"
+    path: ""
   },
   {
     text: "What is React?",
