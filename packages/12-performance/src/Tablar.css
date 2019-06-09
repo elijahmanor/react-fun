@@ -1,0 +1,144 @@
+.Background {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 1fr 2fr 1fr;
+  grid-template-areas:
+    "tl tm tr"
+    "mm mm mm"
+    "bl bm br";
+}
+
+.tl,
+.tm,
+.tr,
+.bl,
+.bm,
+.br {
+  fill: white;
+  background-color: rgba(0, 0, 0, 0.4);
+  min-width: 3rem;
+  text-align: center;
+  border-radius: 5px;
+  display: inline-block;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-color: transparent;
+}
+
+.dark-mode .tl,
+.dark-mode .tm,
+.dark-mode .tr,
+.dark-mode .bl,
+.dark-mode .bm,
+.dark-mode .br {
+  background-color: rgba(255, 255, 255, 0.4);
+  fill: black;
+}
+
+.tl {
+  grid-area: tl;
+  justify-self: start;
+  align-self: start;
+  margin: 1rem 0 0 1rem;
+}
+
+.tm {
+  grid-area: tm;
+  justify-self: center;
+  align-self: start;
+  margin: 1rem 0 0 0;
+}
+
+.tr {
+  grid-area: tr;
+  justify-self: end;
+  align-self: start;
+  margin: 1rem 1rem 0 0;
+}
+
+.mm {
+  grid-area: mm;
+  justify-self: center;
+  align-self: center;
+  margin: 0;
+}
+
+.bl {
+  grid-area: bl;
+  justify-self: start;
+  align-self: end;
+  margin: 0 0 1rem 1rem;
+}
+
+.bm {
+  grid-area: bm;
+  justify-self: center;
+  align-self: end;
+  margin: 0 0 1rem 0;
+}
+
+.br {
+  grid-area: br;
+  justify-self: end;
+  align-self: end;
+  margin: 0 1rem 1rem 0;
+}
+
+.Tablar-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+
+.Tablar-header.Tablar-header--dark {
+  color: black;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: white;
+}
+
+.Tablar-time span:first-child {
+  font-size: 7rem;
+  line-height: 7rem;
+}
+
+.Tablar-time span:last-child {
+  font-size: 2rem;
+  line-height: 2rem;
+}
+
+.Greeting h1 {
+  font-size: 3rem;
+  margin: 1rem 0;
+  cursor: pointer;
+}
+
+.Greeting input {
+  border: 0;
+  border-bottom: 3px solid #fff;
+  background: rgba(255, 255, 255, 0.3);
+  font-weight: bold;
+  color: #fff;
+  font-size: 3rem;
+  outline: 0;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.Greeting input::placeholder {
+  color: #666;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgba(255, 255, 255, 0.9);
+}
+
+[data-reach-dialog-content] {
+  display: flex;
+  justify-content: center;
+}

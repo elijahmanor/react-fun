@@ -1,4 +1,302 @@
 # Context
 
-> 1. Context
-> 1. Lab 07 - Add Settings Context
+> Context is designed to share data that can be considered “global” for a tree of React components --[React Website](https://reactjs.org/docs/context.html)
+
+This can be handy so that you don't have to pass props down multiple levels of React Components (known as "Props Drilling").
+
+## Create Context
+
+```
+const MyContext = React.createContext("Hello");
+```
+
+## Context Provider
+
+```
+const MyContext = React.createContext("Hello");
+
+const MyProvider = ({children}) =>
+  <MyContext.Provider value="world">
+    {children}
+  </MyContext.Provider>;
+```
+
+## Context Consumer
+
+```
+const MyContext = React.createContext("Hello");
+
+const MyProvider = ({children}) =>
+  <MyContext.Provider value="world">
+    {children}
+  </MyContext.Provider>;
+
+const App = () => (
+  <MyProvider>
+    <MyContext.Consumer>
+      {value => <h1>Hello, {value}!</h1>}
+    </MyContext.Consumer>
+  </MyProvider>
+);
+```
+
+## Example
+
+<!-- https://codesandbox.io/s/6lxxo1x5vn -->
+
+```jsx
+import React, { createContext, useContext, useState } from "react";
+
+const ThemeContext = createContext();
+
+const localeMap = {
+  "en-US": { locale: "en-US", flag: "US", content: "Hello, World!" },
+  "fr-FR": { locale: "fr-FR", flag: "FR", content: "Bonjour le monde!" },
+  "es-ES": { locale: "es-ES", flag: "ES", content: "¡Hola Mundo!" }
+};
+
+function LocaleFlag() {
+  const { flag } = useContext(ThemeContext);
+  return <CDNFlagIcon code={flag} size={256} />;
+}
+
+function LocaleContent() {
+  const { content } = useContext(ThemeContext);
+  return <h1>{content}</h1>;
+}
+
+function App() {
+  const [theme, setTheme] = useState("en-US");
+  return (
+    <ThemeContext.Provider value={theme}>
+      <select
+        value={theme.locale}
+        onChange={e => setTheme({ theme: localeMap[e.target.value] })}
+      >
+        <option value="en-US">English</option>
+        <option value="fr-FR">French</option>
+        <option value="es-ES">Spanish</option>
+      </select>
+      <LocaleFlag />
+      <LocaleContent />
+    </ThemeContext.Provider>
+  );
+}
+```
+
+## Another Example
+
+TODO - Talk about performance gotcha. Link to Official docs and Kent's articles
+
+- https://kentcdodds.com/blog/how-to-use-react-context-effectively
+- https://kentcdodds.com/blog/application-state-management-with-react
+- https://kentcdodds.com/blog/usememo-and-usecallback
+- https://kentcdodds.com/blog/how-to-optimize-your-context-value
+
+```jsx
+import React, { useContext, useState, useMemo, useCallback, memo } from "react";
+import { render } from "react-dom";
+import { CDNFlagIcon } from "react-flag-kit";
+import "./index.css";
+
+const ThemeContext = React.createContext();
+
+const localeMap = {
+  "en-US": { locale: "en-US", flag: "US", content: "Hello, World!" },
+  "fr-FR": { locale: "fr-FR", flag: "FR", content: "Bonjour le monde!" },
+  "es-ES": { locale: "es-ES", flag: "ES", content: "¡Hola Mundo!" }
+};
+
+const LocaleSwitcher = memo(props => {
+  console.log("LocaleSwitcher");
+  const [count, setCount] = useState(0);
+  const [locale, setLocale] = useState(localeMap["en-US"]);
+  /* FIX
+  const value = useMemo(() => {
+    return {
+      state: locale,
+      updateLocale: e => setLocale(localeMap[e.target.value])
+    };
+  }, [locale]);
+  return (
+    <ThemeContext.Provider value={value}>
+      {props.children}
+      <button onClick={() => setCount(count + 1)}>
+        Shouldn't Rerender: {count}
+      </button>
+    </ThemeContext.Provider>
+  );
+  */
+  // BUG
+  return (
+    <ThemeContext.Provider
+      value={{
+        state: locale,
+        updateLocale: e => setLocale(localeMap[e.target.value])
+      }}
+    >
+      {props.children}
+      <button onClick={() => setCount(count + 1)}>
+        Shouldn't Rerender: {count}
+      </button>
+    </ThemeContext.Provider>
+  );
+});
+
+const LocaleSelect = memo(() => {
+  console.log("LocaleSelect");
+  const context = useContext(ThemeContext);
+  return (
+    <select value={context.state.locale} onChange={context.updateLocale}>
+      <option value="en-US">English</option>
+      <option value="fr-FR">French</option>
+      <option value="es-ES">Spanish</option>
+    </select>
+  );
+});
+
+const LocaleFlag = memo(() => {
+  console.log("LocaleFlag");
+  const context = useContext(ThemeContext);
+  return <CDNFlagIcon code={context.state.flag} size={256} />;
+});
+
+const LocaleContent = memo(() => {
+  console.log("LocaleContent");
+  const context = useContext(ThemeContext);
+  return <h1>{context.state.content}</h1>;
+});
+
+const App = () => {
+  console.log("App");
+  return (
+    <LocaleSwitcher>
+      <LocaleSelect />
+      <LocaleFlag />
+      <LocaleContent />
+    </LocaleSwitcher>
+  );
+};
+
+render(<App />, document.getElementById("⚛️"));
+```
+
+## Lab
+
+Add a Settings Context to the Tablar program.
+
+### `SettingsContext.js`
+
+```jsx
+import React from "react";
+import useDarkMode from "use-dark-mode";
+
+const SettingsContext = React.createContext();
+
+function useSettings() {
+  const context = React.useContext(SettingsContext);
+  if (!context) {
+    throw new Error(`useSettings must be used within a SettingsProvider`);
+  }
+  return context;
+}
+
+function SettingsProvider(props) {
+  const { value: isDarkMode, toggle: toggleDarkMode } = useDarkMode(false);
+  const value = React.useMemo(() => [isDarkMode, toggleDarkMode], [
+    isDarkMode,
+    toggleDarkMode
+  ]);
+  return <SettingsContext.Provider value={value} {...props} />;
+}
+
+export { SettingsProvider, useSettings };
+```
+
+### `App.js`
+
+```jsx
+import { SettingsProvider } from "./SettingsContext";
+
+/* ... */
+
+function App() {
+  return (
+    <SettingsProvider>
+      <Tablar />
+    </SettingsProvider>
+  );
+}
+```
+
+### `Background.js`
+
+```jsx
+import { useSettings } from "./SettingsContext";
+
+/* ... */
+
+export default function Background({ children }) {
+  /* ... */
+  const [isDarkMode] = useSettings();
+
+  return (
+    <>
+      <div
+        className="Background"
+        style={{
+          backgroundImage: `
+            radial-gradient(circle, transparent 40%, ${
+              isDarkMode ? "black" : "transparent"
+            } 75%),
+            linear-gradient(to right, transparent, transparent),
+            url(${url})
+          `,
+          backgroundPosition: "center center",
+          backgroundSize: "cover"
+        }}
+      >
+        {children}
+      </div>
+    </>
+  );
+}
+```
+
+### `Tablar.js`
+
+```jsx
+/* ... */
+import { useSettings } from "./SettingsContext";
+import { useHotkeys } from "react-hotkeys-hook";
+
+import "./Tablar.css";
+
+export default function Tablar() {
+  /* ... */
+  const [isDarkMode, toggleDarkMode] = useSettings();
+
+  useHotkeys("ctrl+d", () => toggleDarkMode());
+  /* ... */
+
+  return (
+    <Background>
+      <header
+        className={`Tablar-header ${isDarkMode ? "Tablar-header--dark" : null}`}
+      >
+        {/* ... */}
+      </header>
+    </Background>
+  );
+}
+```
+
+### `Tablar.css`
+
+```css
+.Tablar-header.Tablar-header--dark {
+  color: black;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: white;
+}
+```

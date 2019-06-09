@@ -1,0 +1,74 @@
+# useReducer
+
+>
+
+## Lab
+
+Update TicTacToe.js to useReducer instead of multiple useState
+
+### `TicTacToe.js`
+
+```jsx
+import React, { useReducer } from "react";
+/* ... */
+
+function Square({ value, index, onClick }) {
+  const props = useSpring({ opacity: value ? 1 : 0 });
+  return (
+    <button className="Square" onClick={() => onClick(index)}>
+      <animated.div style={props}>{value}</animated.div>
+    </button>
+  );
+}
+
+/* ... */
+
+function Board({ squares, onClick }) {
+  return (
+    <div className="Board">
+      {squares.map((square, i) => (
+        <Square key={i} index={i} value={square} onClick={onClick} />
+      ))}
+    </div>
+  );
+}
+
+/* ... */
+
+const initialState = {
+  squares: Array(9).fill(null),
+  isXNext: true,
+  winner: ""
+};
+
+function gameReducer(state, action) {
+  switch (action.type) {
+    case "START":
+      return initialState;
+    case "MOVE":
+      const moves = [...state.squares];
+      moves[action.index] = state.isXNext ? "X" : "O";
+      return {
+        squares: moves,
+        isXNext: !state.isXNext,
+        winner: calculateWinner(moves)
+      };
+    default:
+      throw new Error();
+  }
+}
+
+/* ... */
+
+export default function Game() {
+  const [{ winner, squares, isXNext }, dispatch] = useReducer(
+    gameReducer,
+    initialState
+  );
+
+  const handleClick = index => dispatch({ type: "MOVE", index });
+  const handleStart = () => dispatch({ type: "START" });
+
+  /* ... */
+}
+```

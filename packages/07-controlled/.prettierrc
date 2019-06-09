@@ -1,9 +1,0 @@
-{
-    "arrowParens": "avoid",
-    "bracketSpacing": true,
-    "jsxBracketSameLine": false,
-    "jsxSingleQuote": false,
-    "singleQuote": false,
-    "semi": true,
-    "useTabs": false
-  }

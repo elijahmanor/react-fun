@@ -87,19 +87,19 @@ const NAVIGATION = [
     path: "context"
   },
   {
+    text: "Data Flow",
+    Component: require("./mdx/15-DataFlow.mdx").default,
+    path: "data-flow"
+  },
+  {
     text: "useReducer",
-    Component: require("./mdx/15-UseReducer.mdx").default,
+    Component: require("./mdx/16-UseReducer.mdx").default,
     path: "usereducer"
   },
   {
     text: "Unit Testing",
-    Component: require("./mdx/16-UnitTesting.mdx").default,
+    Component: require("./mdx/17-UnitTesting.mdx").default,
     path: "unit-testing"
-  },
-  {
-    text: "Data Flow",
-    Component: require("./mdx/17-DataFlow.mdx").default,
-    path: "data-flow"
   },
   {
     text: "CSS in JS",
@@ -112,14 +112,14 @@ const NAVIGATION = [
     path: "performance"
   },
   {
-    text: "Component Library",
-    Component: require("./mdx/20-ComponentLibrary.mdx").default,
-    path: "component-library"
+    text: "SVG Library",
+    Component: require("./mdx/20-SvgLibrary.mdx").default,
+    path: "svg-library"
   },
   {
-    text: "SVG Library",
-    Component: require("./mdx/21-SvgLibrary.mdx").default,
-    path: "svg-library"
+    text: "Component Library",
+    Component: require("./mdx/21-ComponentLibrary.mdx").default,
+    path: "component-library"
   },
   {
     text: "Misc",
@@ -177,9 +177,12 @@ function ResponsiveDrawer(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {NAVIGATION.map(({ text, path }, index) => (
+        {NAVIGATION.filter(
+          item => item.path !== "component-library" && item.path !== "misc"
+        ).map(({ text, path }, index) => (
           <ListItem
             button
+            selected={path === currentPage}
             key={text}
             onClick={() => {
               // navigate(path);

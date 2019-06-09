@@ -1,4 +1,164 @@
 # Forms
 
-> 1. Forms (Controlled, Uncontrolled)
-> 1. Lab 06 - Edit Name (controlled)
+<!-- https://codesandbox.io/s/n95ljrng2 -->
+
+## Controlled Forms
+
+```jsx
+import MemeGenerator from "./MemeGenerator";
+
+function App() {
+  const [topText, setTopText] = useState("");
+  const [lowText, setLowText] = useState("");
+  const handleChange = ({ target: { id, value } }) => {
+    const updater = id === "topText" ? setTopText : setLowText;
+    updater(value);
+  };
+  return (
+    <div style={{ display: "flex" }}>
+      <MemeGenerator
+        image="https://i.chzbgr.com/..."
+        topText={topText}
+        lowText={lowText}
+      />
+      <form className="App-form">
+        <label htmlFor="topText">Top Text</label>
+        <input id="topText" value={topText} onChange={handleChange} />
+        <label htmlFor="lowText">Low Text</label>
+        <input id="lowText" value={lowText} onChange={handleChange} />
+      </form>
+    </div>
+  );
+}
+```
+
+## Uncontrolled Forms
+
+```jsx
+function App() {
+  const [topText, setTopText] = useState("");
+  const [lowText, setLowText] = useState("");
+  const topTextRef = useRef();
+  const lowTextRef = useRef();
+  const handleSubmit = e => {
+    e.preventDefault();
+    setTopText(topTextRef.current.value);
+    setLowText(lowTextRef.current.value);
+  };
+  return (
+    <div style={{ display: "flex" }}>
+      <MemeGenerator
+        image="https://i.chzbgr.com/..."
+        topText={topText}
+        lowText={lowText}
+      />
+      <form className="App-form" onSubmit={handleSubmit}>
+        <label htmlFor="topText">Top Text</label>
+        <input type="text" id="topText" ref={topTextRef} />
+        <label htmlFor="lowText">Low Text</label>
+        <input type="text" id="lowText" ref={lowTextRef} />
+        <button>Generate</button>
+      </form>
+    </div>
+  );
+}
+```
+
+## Lab
+
+### `Greeting.js`
+
+```jsx
+import React, { useState, useRef, useEffect } from "react";
+import greetingTime from "greeting-time";
+
+function isInIframe() {
+  try {
+    return window.self !== window.top;
+  } catch (e) {
+    return true;
+  }
+}
+
+export default function Greeting({ name, onChange }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const input = useRef();
+  useEffect(() => {
+    if (isEditing) {
+      input.current.select();
+    }
+  }, [isEditing]);
+  return (
+    <div className="Greeting">
+      {isEditing ? (
+        <input
+          ref={input}
+          type="text"
+          value={name}
+          autoFocus={!isInIframe()}
+          placeholder="What's your name?"
+          onChange={e => onChange(e.target.value)}
+          onKeyPress={({ key }) => key === "Enter" && setIsEditing(false)}
+          onBlur={() => setIsEditing(false)}
+        />
+      ) : (
+        <h1 onDoubleClick={() => setIsEditing(true)}>
+          {greetingTime(new Date())}, {name}!
+        </h1>
+      )}
+    </div>
+  );
+}
+```
+
+### `Tablar.css`
+
+```css
+.Greeting h1 {
+  font-size: 3rem;
+  margin: 1rem 0;
+  cursor: pointer;
+}
+
+.Greeting input {
+  border: 0;
+  border-bottom: 3px solid #fff;
+  background: rgba(255, 255, 255, 0.3);
+  font-weight: bold;
+  color: #fff;
+  font-size: 3rem;
+  outline: 0;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.Greeting input::placeholder {
+  color: #666;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgba(255, 255, 255, 0.9);
+}
+```
+
+### `Tablar.js`
+
+```diff
++import Greeting from "./Greeting";
+
+export default function Tablar() {
+  /* ... */
++  const [name, setName] = useLocalStorage("name", "");
+  /* ... */
+
+  return (
+    <Background>
+      <header className="Tablar-header">
+        <h1 className="Tablar-time">
+          <span>{hourMinute}</span> <span>{amPm}</span>
+        </h1>
+-        <h1 className="Tablar-message">Hello, Workshop!</h1>
++        <Greeting name={name} onChange={name => setName(name)} />
+      </header>
+    </Background>
+  );
+}
+```

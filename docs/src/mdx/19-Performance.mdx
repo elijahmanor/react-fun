@@ -1,3 +1,108 @@
 # Performance
 
-> 1. Performance Considerations
+React.memo, useCallback, useMemo
+
+## Lab
+
+### `TicTacToe.js`
+
+Perf
+
+TODO - Flush this out
+
+```jsx
+function Square({ value, index, onClick }) {
+  console.log("Square", { index, value });
+  /* ... */
+}
+```
+
+### `TicTacToe.js`
+
+Try adding React.memo to the Square Component
+
+TODO - Flush this out
+
+```jsx
+import React, { memo, useReducer } from "react";
+
+/* ... */
+
+const Square = memo(({ value, index, onClick }) => {
+  console.log("Square", { index, value });
+  /* ... */
+});
+```
+
+### `TicTacToe.js`
+
+Option 1
+
+TODO - Flush this out
+
+```jsx
+import React, { memo, useCallback, useReducer } from "react";
+import classNames from "classnames";
+import "./TicTacToe.scss";
+
+/* Option 1 - memo with areEqual 2nd argument */
+const Square = memo(
+  ({ value, index, onClick }) => {
+    console.log("Square", { index, value });
+    return (
+      <button className="Square" onClick={() => onClick(index)}>
+        {value}
+      </button>
+    );
+  },
+  (prev, next) => prev.value === next.value
+);
+
+/* ... */
+
+export default function Game() {
+  /* ... */
+
+  /* Option 1 - memo with areEqual 2nd argument */
+  const handleClick = index => dispatch({ type: "MOVE", index });
+  const handleStart = () => dispatch({ type: "START" });
+
+  /* ... */
+}
+```
+
+### `TicTacToe.js`
+
+Option 2
+
+TODO - Flush this out
+
+```jsx
+import React, { memo, useCallback, useReducer } from "react";
+import classNames from "classnames";
+import "./TicTacToe.scss";
+
+/* Option 2 - memo with useCallback */
+const Square = memo(({ value, index, onClick }) => {
+  console.log("Square", { index, value });
+  return (
+    <button className="Square" onClick={() => onClick(index)}>
+      {value}
+    </button>
+  );
+});
+
+export default function Game() {
+  /* ... */
+
+  /* Option 2 - memo with useCallback */
+  const handleClick = useCallback(index => dispatch({ type: "MOVE", index }), [
+    dispatch
+  ]);
+  const handleStart = useCallback(() => dispatch({ type: "START" }), [
+    dispatch
+  ]);
+
+  /* ... */
+}
+```
