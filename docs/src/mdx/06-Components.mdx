@@ -1,0 +1,111 @@
+# Components
+
+There are two types of Components in React commonly known as Class Components and Function Components.
+
+Class Components have historically been much more feature rich than Function Components, but with the recent addition of Hooks in React version 16.8, Function Components can do much of what Class Components can.
+
+<!--
+https://codesandbox.io/s/peaceful-water-x2rp4
+-->
+
+## Class Components
+
+| Feature          | Class | Func | Hooks |
+| :--------------- | :---: | :--: | :---: |
+| Props            |  Yes  |  -   |   -   |
+| State            |  Yes  |  -   |   -   |
+| Lifecycle Events |  Yes  |  -   |   -   |
+| Side-Effects     |  Yes  |  -   |   -   |
+| Pure Component   |  Yes  |  -   |   -   |
+| Error Boundaries |  Yes  |  -   |   -   |
+
+```jsx
+class Counter extends React.Component {
+  state = { count: 0 };
+  handleClick = () => {
+    this.setState(prev => ({ count: ++prev.count }));
+  };
+  render() {
+    return <button onClick={this.handleClick}>{this.state.count}</button>;
+  }
+}
+```
+
+```jsx
+class Counter extends React.Component {
+  /* ... */
+  componentDidMount() {
+    window.addEventListener("keypress", this.handleClear);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("keypress", this.handleClear);
+  }
+  /* ... */
+}
+```
+
+```jsx
+class Counter extends React.PureComponent {
+  /* ... */
+}
+```
+
+```jsx
+class Counter extends React.PureComponent {
+  /* ... */
+  shouldComponentUpdate(nextProps, nextState) {
+    if ( /* props or state have changed */ ) {
+      return true;
+    }
+    return false;
+  }
+  /* ... */
+}
+```
+
+```jsx
+class ErrorBoundary extends React.Component {
+  state = { hasError: false };
+
+  componentDidCatch(error, info) {
+    this.setState({ hasError: true });
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <h1>Ka-pow!</h1>;
+    }
+    return this.props.children;
+  }
+}
+```
+
+## Function Components
+
+| Feature          | Class |  Func   | Hooks |
+| :--------------- | :---: | :-----: | :---: |
+| Props            |  Yes  | **Yes** |   -   |
+| State            |  Yes  | **No**  |   -   |
+| Lifecycle Events |  Yes  | **No**  |   -   |
+| Side-Effects     |  Yes  | **No**  |   -   |
+| Pure Component   |  Yes  | **No**  |   -   |
+| Error Boundaries |  Yes  | **No**  |   -   |
+
+```jsx
+function Counter({ count, onClick }) {
+  return <button onClick={onClick}>{count}</button>;
+}
+```
+
+## Hooks
+
+| Feature          | Class |  Func   |  Hooks   |
+| :--------------- | :---: | :-----: | :------: |
+| Props            |  Yes  | **Yes** | **Yes**  |
+| State            |  Yes  |   No    | **Yes**  |
+| Lifecycle Events |  Yes  |   No    | **Some** |
+| Side-Effects     |  Yes  |   No    | **Yes**  |
+| Pure Component   |  Yes  |   No    | **Yes**  |
+| Error Boundaries |  Yes  |   No    |  **No**  |
+
+> Hooks let you use state and other React features in a function component without using a class

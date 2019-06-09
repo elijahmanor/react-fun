@@ -1,0 +1,114 @@
+# useEffect
+
+> The Effect Hook lets you perform side effects in function components --[Using the Effect Hook](https://reactjs.org/docs/hooks-effect.html)
+
+## What is a Side Effect?
+
+Side effects are things that don't directly apply to the function itself. Some examples might be logging, data fetching, setting up external event listeners, change the DOM outside of React.
+
+If you have experience with Class Components, you may have done some of these in `componentDidMoutn`, `componentDidUpdate`, or `componentWillUnmount`.
+
+```jsx
+class KeyCode extends React.Component {
+  state = { code: "" };
+  componentDidMount() {
+    document.addEventListener("keydown", this.handleKey);
+  }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.handleKey);
+  }
+  handleKey = ({ code }) => this.setState({ code });
+  render() {
+    const { code } = this.state;
+    return code ? <h1>{code}</h1> : <h1>Press Any Key</h1>;
+  }
+}
+```
+
+## Converting to useEffect
+
+```jsx
+function KeyCode() {
+  const [code, setCode] = useState("");
+
+  useEffect(() => {
+    const handleKey = ({ code }) => setCode(code);
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, []);
+
+  return code ? <h1>{code}</h1> : <h1>Press Any Key</h1>;
+}
+```
+
+## Lab
+
+### Update Time
+
+#### `Tablar.js`
+
+```jsx
+export default function Tablar() {
+  const [dateTime, setDateTime] = useState(new Date());
+
+  useEffect(() => {
+    window.setInterval(() => {
+      setDateTime(new Date());
+    }, 60000);
+  }, []);
+
+  /* ... */
+}
+```
+
+### Add Background with Local Storage
+
+#### `Background.js`
+
+```jsx
+const UNSPLASH_COLLECTION =
+  "https://source.unsplash.com/collection/3802293/1600x900";
+
+export default function Background({ children }) {
+  const defaultUrl =
+    window.localStorage.getItem("backgroundImage") || UNSPLASH_COLLECTION;
+  const [url, setUrl] = useState(defaultUrl);
+
+  useEffect(() => {
+    async function getUrl() {
+      if (url === UNSPLASH_COLLECTION) {
+        const response = await window.fetch(UNSPLASH_COLLECTION);
+        window.localStorage.setItem("backgroundImage", response.url);
+        setUrl(response.url);
+      }
+    }
+    getUrl();
+  }, [url]);
+
+  useEffect(() => {
+    const handleKey = ({ key, ctrlKey, metaKey }) => {
+      if (key === "b" && (metaKey || ctrlKey)) {
+        window.localStorage.removeItem("backgroundImage");
+        setUrl(UNSPLASH_COLLECTION);
+      }
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, []);
+
+  return (
+    <>
+      <div
+        className="Background"
+        style={{
+          backgroundImage: `url(${url})`,
+          backgroundPosition: "center center",
+          backgroundSize: "cover"
+        }}
+      >
+        {children}
+      </div>
+    </>
+  );
+}
+```

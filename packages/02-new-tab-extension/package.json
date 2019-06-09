@@ -1,5 +1,5 @@
 {
-  "name": "05-custom-hook",
+  "name": "02-new-tab-extension",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

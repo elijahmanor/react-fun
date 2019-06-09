@@ -11,3 +11,62 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.App-heading {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.twitter-follow-button {
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 1rem;
+}
+
+table td,
+table th {
+  padding-right: 0.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  vertical-align: top;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.react-live > div {
+  /* width: 100%; */
+  height: auto;
+  font-size: 1.25rem;
+  min-width: 100%;
+  max-width: calc(100% - 240px);
+}
+
+.react-live .react-live-preview {
+  font-size: 1.25rem !important;
+  width: 25%;
+  padding: 1rem;
+}
+
+.react-live .react-live-preview + div {
+  width: 75%;
+}
+
+.react-live pre {
+  font-size: 1.25rem;
+}
+
+.react-live .react-live-preview button {
+  font-size: 1.25rem;
+}

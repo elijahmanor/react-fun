@@ -1,0 +1,31 @@
+# Rules of Hooks
+
+1. Only call Hooks at the Top Level
+
+   With this in mind, no conditional hooks, hooks in loops, or hooks in different orders. Remember how we made our own implementation of useState? Order is very important.
+
+2. Only Call Hooks from React Functions
+
+   You can call hooks from a Function React Component or from a custom React hook (which we will talk more about later)
+
+## ESLint Rule
+
+Thankfully the React team has put together an ESLint rule to help enforce these rules in addition to other helpful suggestions when using hooks.
+
+```shell
+npm install eslint-plugin-react-hooks --save-dev
+```
+
+```json
+{
+  "plugins": [
+    // ...
+    "react-hooks"
+  ],
+  "rules": {
+    // ...
+    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
+  }
+}
+```

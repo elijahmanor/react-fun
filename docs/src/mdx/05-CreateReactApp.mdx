@@ -1,0 +1,161 @@
+# Create React App
+
+> 1. Create React App and CodeSandbox
+> 1. Lab 03 - Basic New Tab Extension ([03-new-tab-extension](https://codesandbox.io/s/github/elijahmanor/react-fun/tree/master/packages/03-new-tab-extension))
+
+## Getting Started
+
+Once you know the basics (we'll cover those in this talk), then you can get started building locally with the create-react-app command-line utility.
+
+Or, if you just want to tinker online then codesandbox.io is a great option!
+
+## Lab
+
+### `index.css`
+
+```css
+:root {
+  font-size: calc(1vw + 1vh + 0.5vmin);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+}
+```
+
+### `Background.js`
+
+```jsx
+import React from "react";
+
+const getRandom = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
+
+function Ball() {
+  const color = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+  const size = `${getRandom(1, 10)}rem`;
+  return (
+    <div
+      style={{
+        position: "absolute",
+        height: size,
+        width: size,
+        borderRadius: "50%",
+        top: `${getRandom(0, 100)}%`,
+        left: `${getRandom(0, 100)}%`,
+        backgroundColor: color,
+        zIndex: -1
+      }}
+    />
+  );
+}
+const balls = [...Array(100)].map((_, i) => <Ball index={i} />);
+
+export default function Background({ children }) {
+  return (
+    <>
+      <div className="Background">{children}</div>
+      {balls}
+    </>
+  );
+}
+```
+
+### `Tablar.css`
+
+```css
+.Background {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.Tablar-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+
+.Tablar-time span:first-child {
+  font-size: 7rem;
+  line-height: 7rem;
+}
+
+.Tablar-time span:last-child {
+  font-size: 2rem;
+  line-height: 2rem;
+}
+
+.Tablar-message {
+  font-size: 3rem;
+  margin: 1rem 0;
+  cursor: pointer;
+}
+```
+
+### `Tablar.js`
+
+```jsx
+import React from "react";
+import Background from "./Background";
+
+import "./Tablar.css";
+
+export default function Tablar() {
+  const dateTime = new Date();
+  const time = dateTime.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "numeric"
+  });
+  const [hourMinute, amPm] = time.split(" ");
+
+  return (
+    <Background>
+      <header className="Tablar-header">
+        <h1 className="Tablar-time">
+          <span>{hourMinute}</span> <span>{amPm}</span>
+        </h1>
+        <h1 className="Tablar-message">Hello, Workshop!</h1>
+      </header>
+    </Background>
+  );
+}
+```
+
+### `App.js`
+
+```jsx
+import React from "react";
+import Tablar from "./Tablar";
+import "./App.css";
+
+function App() {
+  return <Tablar />;
+}
+
+export default App;
+```
+
+### `public/manifest.json`
+
+```json
+{
+  "short_name": "Tablar",
+  "manifest_version": 2,
+  "name": "Tablar",
+  "version": "1.0",
+  "chrome_url_overrides": {
+    "newtab": "./index.html"
+  },
+  "content_security_policy": "script-src 'self' 'sha256-5As4+3YpY62+l38PsxCEkjB1R4YtyktBtRScTJ3fyLU='; object-src 'self'"
+}
+```

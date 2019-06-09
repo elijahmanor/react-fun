@@ -1,0 +1,106 @@
+# useState
+
+```jsx
+function Counter() {
+  // Call useState passing initial value.
+  // It returns an array with two items.
+  const state = React.useState(0);
+
+  // 1st item is the current value
+  const count = state[0];
+
+  // 2nd item is the updater function
+  const setCount = state[1];
+
+  return <button onClick={() => setCount(count + 1)}>{count}</button>;
+}
+```
+
+## Array Destructuring
+
+```jsx
+function Counter() {
+  const [count, setCount] = React.useState(0);
+
+  return <button onClick={() => setCount(count + 1)}>{count}</button>;
+}
+```
+
+## How Does this Even Work?
+
+Let's create our own `useState` function and see what is going on.
+
+**NOTE**: The following code is oversimplified, but intended to convey the idea of what is going on behind the scenese.
+
+### Support One State
+
+```js
+let hook = [];
+
+const useState = initial => {
+  const setState = value => {
+    hook[0] = value;
+    reRender();
+  };
+  return [hook[0] || initial, setState];
+};
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return <button onClick={() => setCount(count + 1)}>{count}</button>;
+}
+
+function reRender() {
+  ReactDOM.render(<Counter />, document.getElementById("root"));
+}
+reRender();
+```
+
+## Support Multiple States
+
+```js
+const hooks = [];
+let hookIndex = -1;
+
+const useState = initial => {
+  const index = ++hookIndex;
+  const setState = value => {
+    hooks[index][0] = value;
+    reRender();
+  };
+  const oldHook = hooks[hookIndex] || [];
+  const hook = [oldHook[0] || initial, setState];
+  hooks.push(hook);
+  return hook;
+};
+
+const isNumberPrime = num => {
+  for (let i = 2; i < num; i++) if (num % i === 0) return false;
+  return num > 1;
+};
+function Counter() {
+  const [count, setCount] = useState(0);
+  const [isPrime, setPrime] = useState(false);
+
+  return (
+    <button
+      onClick={() => {
+        const newNumber = count + 1;
+        setCount(newNumber);
+        setPrime(isNumberPrime(newNumber));
+      }}
+    >
+      {isPrime && "Prime: "} {count}
+    </button>
+  );
+}
+
+function reRender() {
+  hookIndex = -1;
+  ReactDOM.render(<Counter />, document.getElementById("root"));
+}
+reRender();
+```
+
+<!-- https://gist.github.com/elijahmanor/fd8ee9f06eb09ec00b12c99ebb304139 -->

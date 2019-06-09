@@ -1,0 +1,80 @@
+# Custom Hooks
+
+```jsx
+const useDocumentKeyCode = () => {
+  const [code, setCode] = useState("");
+  useEffect(() => {
+    const handleKey = ({ code }) => setCode(code);
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, []);
+  return code;
+};
+
+function KeyCode() {
+  const code = useDocumentKeyCode();
+  return code ? <h1>{code}</h1> : <h1>Press Any Key</h1>;
+}
+```
+
+```jsx
+const useDocumentKeyCodes = () => {
+  const [codes, setCodes] = useState({});
+  useEffect(() => {
+    const handleKey = ({ keyCode, key, code }) =>
+      setCodes({ keyCode, key, code });
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, []);
+  return codes;
+};
+```
+
+## Lab
+
+### `customHooks.js`
+
+```jsx
+import { useState, useEffect } from "react";
+
+export const useLocalStorage = (key, defaultValue) => {
+  const initialValue = () =>
+    JSON.parse(
+      window.localStorage.getItem(key) || JSON.stringify(defaultValue)
+    );
+  const [storage, updateStorage] = useState(initialValue);
+  useEffect(() => {
+    window.localStorage.setItem(key, JSON.stringify(storage));
+  }, [key, storage]);
+  return [storage, updateStorage];
+};
+```
+
+### `Background.js`
+
+```jsx
+import { useLocalStorage } from "./customHooks";
+
+export default function Background({ children }) {
+  const [url, setUrl] = useLocalStorage("backgroundImage", UNSPLASH_COLLECTION);
+
+  useEffect(() => {
+    async function getUrl() {
+      if (url === UNSPLASH_COLLECTION) {
+        const response = await window.fetch(UNSPLASH_COLLECTION);
+        setUrl(response.url);
+      }
+    }
+    getUrl();
+  }, [setUrl, url]);
+
+  useEffect(() => {
+    const handleKey = ({ key, ctrlKey, metaKey }) => {
+      if (key === "b" && (metaKey || ctrlKey)) {
+        setUrl(UNSPLASH_COLLECTION);
+      }
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, [setUrl]);
+```

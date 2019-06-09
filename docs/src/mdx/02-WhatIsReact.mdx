@@ -1,0 +1,99 @@
+# What Is React?
+
+> 1. What is React?
+
+> A JavaScript Library for Building User Interfaces --[React Website](https://facebook.github.io/react/)
+
+## Who Uses React?
+
+- Atlassian
+- BBC
+- Codecademy
+- Dropbox
+- Facebook
+- GitHub
+- Imgur
+- Instagram
+- Netflix
+- PayPal
+- Reddit
+- Salesforce
+- Venmo
+- WhatsApp
+- Wired
+- Yahoo
+
+Add your own entry to [Facebook's Sites Using React Wiki](https://github.com/facebook/react/wiki/Sites-Using-React)
+
+## So, it's like Angular or Ember?
+
+Nope
+
+> Lots of people use React as the V in MVC. --[React Website](https://facebook.github.io/react/)
+
+## So, it's a template library?
+
+Nope
+
+> React components are far more powerful than Angular templates; they should be compared with Angular's directives instead --[Pete Hunt (Quora)](http://www.quora.com/Pete-Hunt/Posts/Facebooks-React-vs-AngularJS-A-Closer-Look))
+
+## Why is it Compelling?
+
+- Declarative and Composable
+- Virtual DOM
+- One-Way Data Flow
+
+## Declarative and Composable
+
+- React is an Abstraction away from the DOM
+- Re-render the whole app on every update (not really)
+- It Simplifies the Mental Model
+- Mix and match components to build UIs
+
+### Imperative: How
+
+```
+$('form').on('submit', function(e) {
+  e.preventDefault();
+  $.ajax({
+    url: '/customers',
+    type: 'POST',
+    data: $(this).serialize(),
+    success: function(data) {
+      $('.status')
+        .append('<h3>' + data + '</h3>');
+    }
+  });
+});
+```
+
+### Declarative: What
+
+```
+var NoteBox = React.createClass({
+  // ... more code ...
+  render: function() {
+    return <div className="NoteBox">
+      <h1>Notes</h1>
+      <NoteList data={this.state.data} />
+      <NoteForm onPost={this.handlePost} />
+    </div>;
+  }
+});
+```
+
+## Virtual DOM
+
+- Re-rendering the whole app on every update is not efficient
+- The Virtual DOM will only update what is necessary
+- It works much like a Gaming Engine
+
+> I tend to think of React as Version Control for the DOM --AdonisSMU
+
+## React Uses a One-Way Data Flow
+
+> ...you can set the directionality of it to be 2-Way Data Binding. That actually seems to be a good idea until you have a large scale application and then it turns out you have no idea whats going on... and turns out to be an anti-pattern for large apps. --[Misko Hevery](https://www.youtube.com/watch?v=uD6Okha_Yj0#t=1785)
+
+## So, Why is it Compelling?
+
+> Declarative → Predictable → Confidence → Reliability --[Tom Ochino's React.js Conf keynote](https://www.youtube.com/watch?v=KVZ-P-ZI6W4#t=868)

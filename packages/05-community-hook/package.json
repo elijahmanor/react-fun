@@ -1,5 +1,5 @@
 {
-  "name": "03-new-tab-extension",
+  "name": "05-community-hook",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

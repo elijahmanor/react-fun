@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -17,25 +17,115 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import "prism-themes/themes/prism-darcula.css";
 
 const drawerWidth = 240;
-const basepath = window.location.pathname;
+// const basepath = window.location.pathname;
 
 const NAVIGATION = [
   {
     text: "Home",
-    Component: require("./mdx/Home.mdx").default,
+    Component: require("./mdx/01-Home.mdx").default,
     path: "home"
   },
   {
     text: "What is React?",
-    Component: require("./mdx/WhatIsReact.mdx").default,
+    Component: require("./mdx/02-WhatIsReact.mdx").default,
     path: "what-is-react"
   },
   {
     text: "React Sans Build",
-    Component: require("./mdx/ReactSansBuild.mdx").default,
+    Component: require("./mdx/03-ReactSansBuild.mdx").default,
     path: "react-sans-build"
   },
-  { text: "JSX", Component: require("./mdx/JSX.mdx").default, path: "jsx" }
+  { text: "JSX", Component: require("./mdx/04-JSX.mdx").default, path: "jsx" },
+  {
+    text: "Create React App",
+    Component: require("./mdx/05-CreateReactApp.mdx").default,
+    path: "create-react-app"
+  },
+  {
+    text: "Components",
+    Component: require("./mdx/06-Components.mdx").default,
+    path: "components"
+  },
+  {
+    text: "What are Hooks?",
+    Component: require("./mdx/07-WhatAreHooks.mdx").default,
+    path: "what-are-hooks"
+  },
+  {
+    text: "useState",
+    Component: require("./mdx/08-UseState.mdx").default,
+    path: "usestate"
+  },
+  {
+    text: "useEffect",
+    Component: require("./mdx/09-UseEffect.mdx").default,
+    path: "useeffect"
+  },
+  {
+    text: "Rules of Hooks",
+    Component: require("./mdx/10-RulesOfHooks.mdx").default,
+    path: "rules-of-hooks"
+  },
+  {
+    text: "Custom Hooks",
+    Component: require("./mdx/11-CustomHooks.mdx").default,
+    path: "custom-hooks"
+  },
+  {
+    text: "Community Hooks",
+    Component: require("./mdx/12-CommunityHooks.mdx").default,
+    path: "community-hooks"
+  },
+  {
+    text: "Forms",
+    Component: require("./mdx/13-Forms.mdx").default,
+    path: "forms"
+  },
+  {
+    text: "Context",
+    Component: require("./mdx/14-Context.mdx").default,
+    path: "context"
+  },
+  {
+    text: "useReducer",
+    Component: require("./mdx/15-UseReducer.mdx").default,
+    path: "usereducer"
+  },
+  {
+    text: "Unit Testing",
+    Component: require("./mdx/16-UnitTesting.mdx").default,
+    path: "unit-testing"
+  },
+  {
+    text: "Data Flow",
+    Component: require("./mdx/17-DataFlow.mdx").default,
+    path: "data-flow"
+  },
+  {
+    text: "CSS in JS",
+    Component: require("./mdx/18-CssInJs.mdx").default,
+    path: "css-in-js"
+  },
+  {
+    text: "Performance",
+    Component: require("./mdx/19-Performance.mdx").default,
+    path: "performance"
+  },
+  {
+    text: "Component Library",
+    Component: require("./mdx/20-ComponentLibrary.mdx").default,
+    path: "component-library"
+  },
+  {
+    text: "SVG Library",
+    Component: require("./mdx/21-SvgLibrary.mdx").default,
+    path: "svg-library"
+  },
+  {
+    text: "Misc",
+    Component: require("./mdx/99-Misc.mdx").default,
+    path: "misc"
+  }
 ];
 
 const useStyles = makeStyles(theme => ({
@@ -56,7 +146,7 @@ const useStyles = makeStyles(theme => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up("lg")]: {
+    [theme.breakpoints.up("md")]: {
       display: "none"
     }
   },
@@ -103,6 +193,17 @@ function ResponsiveDrawer(props) {
     </div>
   );
 
+  function handleKeyPress({ ctrlKey, code }) {
+    if (ctrlKey && code === "KeyM") {
+      setCurrentPage("misc");
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("keypress", handleKeyPress);
+    return () => window.removeEventListener("keypress", handleKeyPress);
+  }, []);
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -117,8 +218,21 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            React Fundamentals v2 (Hooks Edition)
+          <Typography variant="h6" noWrap className="App-heading">
+            <a
+              style={{ color: "white", textDecoration: "none" }}
+              href="http://b.link/react-fun"
+            >
+              React Fundamentals v2 (Hooks Edition)
+            </a>
+            <a
+              href="https://twitter.com/elijahmanor?ref_src=twsrc%5Etfw"
+              class="twitter-follow-button"
+              data-size="large"
+              data-show-count="false"
+            >
+              Follow @elijahmanor
+            </a>
           </Typography>
         </Toolbar>
       </AppBar>
@@ -140,7 +254,7 @@ function ResponsiveDrawer(props) {
             {drawer}
           </Drawer>
         </Hidden>
-        <Hidden xsDown implementation="css">
+        <Hidden smDown implementation="css">
           <Drawer
             classes={{
               paper: classes.drawerPaper
