@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useLocalStorage } from "./customHooks";
+import { useLocalStorage } from "crooks";
 
 const UNSPLASH_COLLECTION =
   "https://source.unsplash.com/collection/3802293/1600x900";
