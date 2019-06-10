@@ -115,7 +115,7 @@ export default function Background({ children }) {
 
 ## Gotchas
 
-TODO
+If you get the dependencies array wrong you could run into the case where TONS of effects are executed. If you happen to have a AJAX request in one of those effectts, then that could be VERY bad. Kent C. Dodds has made a nice development utility to try and identify those issues before they hit production.
 
 - https://github.com/kentcdodds/stop-runaway-react-effects
 

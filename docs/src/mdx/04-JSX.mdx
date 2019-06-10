@@ -29,7 +29,11 @@ function Ball() {
 ReactDOM.render(<Ball />, document.getElementById("app"));
 ```
 
-Doesn't the look much better? Well, normally you would need a build step to convert JSX to the desired JavaScript output,
+Doesn't the look much better? Well, that was initially debated when React first came out...
+
+![](./images/iamdeveloper-jsx.png)
+
+Normally you would need a build step to convert JSX to the desired JavaScript output,
 but for testing purposes you can add the standalone `babel` script and add a `type="text/babel"` attribute to your `<script>` tag.
 
 ```html

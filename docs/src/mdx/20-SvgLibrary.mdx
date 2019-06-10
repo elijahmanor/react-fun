@@ -1,10 +1,12 @@
 # Svg Library
 
-TODO
+SVGs are a very old technology, but in the past few years have become much more prominent due to their small size and ability to scale well with high quality.
+
+Since SVGs are just XML you can dynamically generate them with React and by doing so you can style them either with code or with CSS.
 
 ## Lab
 
-Adding a SVG Library to Tablar
+Adding a SVG Library to Tablar. This will be a somewhat manual process, but it provides a lot of flexibility.
 
 ### `Icon.js`
 
@@ -215,6 +217,11 @@ export default function Tablar() {
   );
 }
 ```
+
+## Other Techniques
+
+- [`svgo`](http://npm.im/svgo) and its UI counterpart [SVGOMG](https://jakearchibald.github.io/svgomg/)
+- [`svg-sprite`](https://npm.im/svg-sprite) where you can generate a SVG Library from a folder of individual svg files and then inject with [react-svg-inline](http://npm.im/react-svg-inline)
 
 ## Code Check Point
 

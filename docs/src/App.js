@@ -185,7 +185,24 @@ function ResponsiveDrawer(props) {
 
   const drawer = (
     <div>
-      <div className={classes.toolbar} />
+      <div
+        className={classes.toolbar}
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center"
+        }}
+      >
+        <span style={{ margin: "1rem", color: "#666" }}>v2.0.0</span>
+        {hasNext && (
+          <button
+            style={{ fontSize: "2rem", border: "transparent" }}
+            onClick={handleNext}
+          >
+            <i className="material-icons">keyboard_arrow_right</i>
+          </button>
+        )}
+      </div>
       <Divider />
       <List>
         {NAVIGATION.filter(
@@ -237,7 +254,7 @@ function ResponsiveDrawer(props) {
               style={{ color: "white", textDecoration: "none" }}
               href="http://b.link/react-fun"
             >
-              React Fundamentals v2 (Hooks Edition)
+              React Fundamentals: Hooks Edition
             </a>
             <a
               href="https://twitter.com/elijahmanor?ref_src=twsrc%5Etfw"
