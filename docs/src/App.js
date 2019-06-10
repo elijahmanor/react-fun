@@ -17,7 +17,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 // import { Router, Link, navigate } from "@reach/router";
 import "prism-themes/themes/prism-darcula.css";
 
-const version = "v2.1.1";
+const version = "v2.2.0";
 const drawerWidth = 240;
 // const basepath = window.location.pathname;
 
@@ -171,11 +171,7 @@ function ResponsiveDrawer(props) {
   const navIndex = NAVIGATION.findIndex(n => n.path === currentPage);
   const Component = NAVIGATION[navIndex].Component;
   const hasNext =
-    navIndex !==
-    NAVIGATION.filter(
-      item => item.path !== "component-library" && item.path !== "misc"
-    ).length -
-      1;
+    navIndex !== NAVIGATION.filter(item => item.path !== "misc").length - 1;
 
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
   const handleNext = () => setCurrentPage(NAVIGATION[navIndex + 1].path);
@@ -206,21 +202,21 @@ function ResponsiveDrawer(props) {
       </div>
       <Divider />
       <List>
-        {NAVIGATION.filter(
-          item => item.path !== "component-library" && item.path !== "misc"
-        ).map(({ text, path }, index) => (
-          <ListItem
-            button
-            selected={path === currentPage}
-            key={text}
-            onClick={() => {
-              // navigate(path);
-              setCurrentPage(path);
-            }}
-          >
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        {NAVIGATION.filter(item => item.path !== "misc").map(
+          ({ text, path }, index) => (
+            <ListItem
+              button
+              selected={path === currentPage}
+              key={text}
+              onClick={() => {
+                // navigate(path);
+                setCurrentPage(path);
+              }}
+            >
+              <ListItemText primary={text} />
+            </ListItem>
+          )
+        )}
       </List>
     </div>
   );
