@@ -26,6 +26,39 @@ function Counter() {
 }
 ```
 
+## Doesn't Work Exactly Like `this.setState()`
+
+If you have experience with Class Components, then you may be familiar that `this.setState()` merges any changes passed to it with it's current value. However, the `useState` updater does not do that.
+
+```jsx
+function Counter() {
+  const [counts, setCounts] = React.useState({
+    count1: 0,
+    count2: 0
+  });
+
+  return (
+    <>
+      <button onClick={() => setCounts({ count1: counts.count1 + 1 })}>
+        {counts.count1}
+      </button>
+      <button onClick={() => setCounts({ count2: counts.count2 + 1 })}>
+        {counts.count2}
+      </button>
+    </>
+  );
+}
+```
+
+However, there is a hack I learned from Kent C. Dodds you can write to fake it out.
+
+```js
+const [state, setState] = React.useReducer(
+  (p, n) => ({ ...p, ...n }),
+  initialState
+);
+```
+
 ## How Does this Even Work?
 
 Let's create our own `useState` function and see what is going on.

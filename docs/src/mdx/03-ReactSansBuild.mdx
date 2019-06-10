@@ -1,13 +1,10 @@
 # React Sans Build
 
-> 1. React Sans Build -- TALK ABOUT PROPS
-> 1. Lab 01 - Play with React.createElement
-
 ## First Hello, World! App
 
-Inside your `<head>` element add the main `react` and `react-dom` scripts from `unpkg.com`.
+For our first interactive lab we will be using [Glitch](https://glitch.com/). It's a quick and easy way to play around with web technologies and build from others. Start a new `hello-webpage` project
 
-https://runpkg.com/
+Open the `index.html` file and inside your `<head>` element add the main `react` and `react-dom` scripts from [unpkg.com](https://unpkg.com/), a CDN that pulls from [npm](https://www.npmjs.com/) built by [Michael Jackson](https://twitter.com/mjackson). If your curious about unpkg, then you can check out [runpkg.com](https://runpkg.com/) built by [Formidable](https://formidable.com/blog/2019/runpkg/). Make sure these scripts are before the existing `<script src="/script.js" defer></script>` element.
 
 ```html
 <script
@@ -32,6 +29,16 @@ Now, inside of the `<body>` tag add a `<div>` element with `id` of `app`.
 </script>
 ```
 
+## `React.createElement` Signature
+
+```js
+React.createElement(
+  type, // 1st argument
+  [props], // 2nd optional argument
+  [...children] // 3rd...nth optional children arguments
+);
+```
+
 If you'd prefer you could pull out the script into another file to isolate what you are editing...
 
 ```html
@@ -39,6 +46,10 @@ If you'd prefer you could pull out the script into another file to isolate what 
 ```
 
 You can fork this glitch to get setup if you'd like to follow along... https://glitch.com/edit/#!/funky-gum
+
+<!-- Remix Button -->
+
+<a href="https://glitch.com/edit/#!/remix/funky-gum"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix this" height="33" /></a>
 
 ## Making things slightly Dynamic
 
@@ -52,6 +63,8 @@ ReactDOM.render(
 );
 ```
 
+The children can be multiple parameters...
+
 ```javascript
 const name = "Elijah";
 ReactDOM.render(
@@ -59,6 +72,8 @@ ReactDOM.render(
   document.getElementById("app")
 );
 ```
+
+The 2nd parameter are props passed into the element. Note the use of `className` instead of `class` (reserved word).
 
 ```javascript
 const name = "Elijah";
@@ -73,6 +88,20 @@ ReactDOM.render(
   ),
   document.getElementById("app")
 );
+```
+
+### `style.css`
+
+```css
+.Ball {
+  display: inline-block;
+  background-color: red;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  line-height: 50px;
+  text-align: center;
+}
 ```
 
 ```javascript

@@ -1,15 +1,20 @@
 # Create React App
 
-> 1. Create React App and CodeSandbox
-> 1. Lab 03 - Basic New Tab Extension ([03-new-tab-extension](https://codesandbox.io/s/github/elijahmanor/react-fun/tree/master/packages/03-new-tab-extension))
-
 ## Getting Started
 
-Once you know the basics (we'll cover those in this talk), then you can get started building locally with the create-react-app command-line utility.
-
-Or, if you just want to tinker online then codesandbox.io is a great option!
+Two great ways to get started when playing around with React is either `create-react-app` or [CodeSandbox](https://codesandbox.io/) if you want to tinker with something online and possibly share it with someone.
 
 ## Lab
+
+Let's take some of the concepts we just learned and start a new project and turn it into a Chrome Extension (or a Microsoft Edge Canary Extension).
+
+### Create a new React Application
+
+As long as you have `npm` version 5.2 or above, you should have a tool called `npx` already installed. It's a handy way to interact with `npm` without having to globally install modules or simplify interactiving with local modules from the command-line. If you are curious I have a [free course](https://egghead.io/courses/execute-npm-package-binaries-with-the-npx-package-runner) all about `npx` on [Egghead.io](https://egghead.io) that you can watch.
+
+```shell
+npx create-react-app Tablar
+```
 
 ### `index.css`
 
@@ -159,3 +164,10 @@ export default App;
   "content_security_policy": "script-src 'self' 'sha256-5As4+3YpY62+l38PsxCEkjB1R4YtyktBtRScTJ3fyLU='; object-src 'self'"
 }
 ```
+
+## Code Check Point
+
+At this point in the Workshop you should be somewhere near the following checkpoint
+
+- [GitHub](https://github.com/elijahmanor/react-fun/tree/master/packages/02-new-tab-extension)
+- [CodeSandbox](https://codesandbox.io/s/github.com/elijahmanor/react-fun/tree/master/packages/02-new-tab-extension)

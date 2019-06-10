@@ -1,8 +1,5 @@
 # JSX
 
-> 1. Introduction to JSX -- TALK ABOUT PROPS
-> 1. Lab 02 - Play with JSX
-
 Wouldn't it be nice if you didn't have to write and nest out all of that JavaScript like the following code snippet? Well, that's were JSX comes into play.
 
 ```jsx
@@ -51,6 +48,7 @@ Now that things are a bit simplier, let's spice this up a little and have some f
 Since JSX is converted to React.createElement calls, you must have React in scope. So, get in the habbit of importing or requiring React in your files.
 
 ```javascript
+import React from "react";
 ```
 
 ## When is JSX Used?
@@ -62,10 +60,13 @@ The following 4 components are equivalent and you could see something like that 
 function Component1() {
   return <h1>Hello, World!</h1>;
 }
+
 const Component2 = () => {
   return <h1>Hello, World!</h1>;
 };
+
 const Component3 = () => <h1>Hello, World!</h1>;
+
 class Component4 extends React.Component {
   render() {
     return <h1>Hello, World!</h1>;
@@ -110,9 +111,19 @@ function MyComponent(props) {
 }
 ```
 
+## Destructuring from Props
+
+It's pretty common to mix argument destructuring along with the `props` argument passed into a Function Component
+
 ```jsx
-function MyComponent(props) {
+function MyComponent1(props) {
   return <h1 title={props.name}>Hello, {props.name}!</h1>;
+}
+
+// versus
+
+function MyComponent2({ name }) {
+  return <h1 title={name}>Hello, {name}!</h1>;
 }
 ```
 
@@ -128,35 +139,29 @@ function MyComponent(props) {
 }
 ```
 
-## `class` is `className`
-
-```jsx
-```
-
 ## Okay, so let's have some fun...
 
 ```jsx
 // npx how-2 -l javascript random hex color
-function Ball(props) {
-    const color = `#${Math.floor(Math.random()*16777215).toString(16)}`;
-    return (
-        <div className="Ball" style={{backgroundColor: color}}>
-        <span>{props.index}</span>
-        </div>
-    );
+function Ball({ index }) {
+  const color = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+  return (
+    <div className="Ball" style={{ backgroundColor: color }}>
+      <span>{index}</span>
+    </div>
+  );
 }
-const balls = [...Array(10)].map( (_, i) => <Ball index={i} />)
-ReactDOM.render(
-    <main>{ balls }</main>,
-    document.getElementById("app")
-);
-</script>
+const balls = [...Array(10)].map((_, i) => <Ball index={i} />);
+ReactDOM.render(<main>{balls}</main>, document.getElementById("app"));
 ```
 
+<!-- TODO
 NOTE: Fill out more gaps from https://reactjs.org/docs/jsx-in-depth.html
 https://gist.github.com/delibytes/5b4f480427b9e7a923f7a313e58aaca8
 https://frontarm.com/james-k-nelson/jsx-live-cheatsheet/
+-->
 
+<!-- TODO
 ## Spreading props
 
 ```jsx
@@ -187,3 +192,4 @@ https://frontarm.com/james-k-nelson/jsx-live-cheatsheet/
 ## Dot Notation
 
 ## Capitalize Custom Components
+-->

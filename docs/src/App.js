@@ -12,6 +12,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 // import { Router, Link, navigate } from "@reach/router";
 import "prism-themes/themes/prism-darcula.css";
@@ -166,11 +167,21 @@ function ResponsiveDrawer(props) {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [currentPage, setCurrentPage] = useState("home");
-  const Component = NAVIGATION.find(n => n.path === currentPage).Component;
+  const navIndex = NAVIGATION.findIndex(n => n.path === currentPage);
+  const Component = NAVIGATION[navIndex].Component;
+  const hasNext =
+    navIndex !==
+    NAVIGATION.filter(
+      item => item.path !== "component-library" && item.path !== "misc"
+    ).length -
+      1;
 
-  function handleDrawerToggle() {
-    setMobileOpen(!mobileOpen);
-  }
+  const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
+  const handleNext = () => setCurrentPage(NAVIGATION[navIndex + 1].path);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
 
   const drawer = (
     <div>
@@ -277,6 +288,11 @@ function ResponsiveDrawer(props) {
             <Component path={path} />
           ))}
         </Router> */}
+        {hasNext && (
+          <Button variant="contained" color="primary" onClick={handleNext}>
+            Next Section
+          </Button>
+        )}
       </main>
     </div>
   );
