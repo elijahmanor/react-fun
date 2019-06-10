@@ -6,43 +6,46 @@ This can be handy so that you don't have to pass props down multiple levels of R
 
 ## Create Context
 
-```
+```js
 const MyContext = React.createContext("Hello");
 ```
 
 ## Context Provider
 
-```
+```jsx
 const MyContext = React.createContext("Hello");
 
-const MyProvider = ({children}) =>
-  <MyContext.Provider value="world">
-    {children}
-  </MyContext.Provider>;
+const MyProvider = ({ children }) => (
+  <MyContext.Provider value="world">{children}</MyContext.Provider>
+);
 ```
 
 ## Context Consumer
 
-```
+```jsx
 const MyContext = React.createContext("Hello");
 
-const MyProvider = ({children}) =>
-  <MyContext.Provider value="world">
-    {children}
-  </MyContext.Provider>;
+const MyProvider = ({ children }) => (
+  <MyContext.Provider value="world">{children}</MyContext.Provider>
+);
 
 const App = () => (
   <MyProvider>
-    <MyContext.Consumer>
-      {value => <h1>Hello, {value}!</h1>}
-    </MyContext.Consumer>
+    <MyContext.Consumer>{value => <h1>Hello, {value}!</h1>}</MyContext.Consumer>
   </MyProvider>
 );
 ```
 
 ## Example
 
-<!-- https://codesandbox.io/s/6lxxo1x5vn -->
+You can use the following Codesandbox to follow along with the context code examples.
+
+<a href="https://codesandbox.io/s/6lxxo1x5vn?fontsize=14">
+  <img
+    alt="Edit react-16.3.0-context-api"
+    src="https://codesandbox.io/static/img/play-codesandbox.svg"
+  />
+</a>
 
 ```jsx
 import React, { createContext, useContext, useState } from "react";
@@ -84,14 +87,18 @@ function App() {
 }
 ```
 
-## Another Example
+## Passing an Updater Function with Value
 
-TODO - Talk about performance gotcha. Link to Official docs and Kent's articles
+It is common to pass along updater functions in the value along with state, however, you need to be careful because if the object reference is different then all consumers will rerender.
+
+Kent C. Dodds has a series of articles that address important considerations when using context.
 
 - https://kentcdodds.com/blog/how-to-use-react-context-effectively
 - https://kentcdodds.com/blog/application-state-management-with-react
 - https://kentcdodds.com/blog/usememo-and-usecallback
 - https://kentcdodds.com/blog/how-to-optimize-your-context-value
+
+### Context Code with a Bug
 
 ```jsx
 import React, { useContext, useState, useMemo, useCallback, memo } from "react";
@@ -111,23 +118,7 @@ const LocaleSwitcher = memo(props => {
   console.log("LocaleSwitcher");
   const [count, setCount] = useState(0);
   const [locale, setLocale] = useState(localeMap["en-US"]);
-  /* FIX
-  const value = useMemo(() => {
-    return {
-      state: locale,
-      updateLocale: e => setLocale(localeMap[e.target.value])
-    };
-  }, [locale]);
-  return (
-    <ThemeContext.Provider value={value}>
-      {props.children}
-      <button onClick={() => setCount(count + 1)}>
-        Shouldn't Rerender: {count}
-      </button>
-    </ThemeContext.Provider>
-  );
-  */
-  // BUG
+
   return (
     <ThemeContext.Provider
       value={{
@@ -179,6 +170,33 @@ const App = () => {
 };
 
 render(<App />, document.getElementById("⚛️"));
+```
+
+### Context Code with a Fix
+
+```jsx
+/* ... */
+
+const LocaleSwitcher = memo(props => {
+  /* ... */
+
+  const value = useMemo(() => {
+    return {
+      state: locale,
+      updateLocale: e => setLocale(localeMap[e.target.value])
+    };
+  }, [locale]);
+  return (
+    <ThemeContext.Provider value={value}>
+      {props.children}
+      <button onClick={() => setCount(count + 1)}>
+        Shouldn't Rerender: {count}
+      </button>
+    </ThemeContext.Provider>
+  );
+});
+
+/* ... */
 ```
 
 ## Lab
@@ -300,3 +318,10 @@ export default function Tablar() {
   -webkit-text-stroke-color: white;
 }
 ```
+
+## Code Check Point
+
+At this point in the Workshop you should be somewhere near the following checkpoint
+
+- [GitHub](https://github.com/elijahmanor/react-fun/tree/master/packages/07-context)
+- [CodeSandbox](https://codesandbox.io/s/github/elijahmanor/react-fun/tree/master/packages/07-context)

@@ -108,6 +108,7 @@ export default function Game() {
   }
   function handleStart() {
     setSquares(Array(9).fill(null));
+    setIsXNext(true);
     setWinner(null);
   }
 

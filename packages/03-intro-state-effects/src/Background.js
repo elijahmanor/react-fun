@@ -20,8 +20,8 @@ export default function Background({ children }) {
   }, [url]);
 
   useEffect(() => {
-    const handleKey = ({ key, ctrlKey, metaKey }) => {
-      if (key === "b" && (metaKey || ctrlKey)) {
+    const handleKey = ({ key, ctrlKey }) => {
+      if (key === "b" && ctrlKey) {
         window.localStorage.removeItem("backgroundImage");
         setUrl(UNSPLASH_COLLECTION);
       }

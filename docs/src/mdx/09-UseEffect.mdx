@@ -86,8 +86,8 @@ export default function Background({ children }) {
   }, [url]);
 
   useEffect(() => {
-    const handleKey = ({ key, ctrlKey, metaKey }) => {
-      if (key === "b" && (metaKey || ctrlKey)) {
+    const handleKey = ({ key, ctrlKey }) => {
+      if (key === "b" && ctrlKey) {
         window.localStorage.removeItem("backgroundImage");
         setUrl(UNSPLASH_COLLECTION);
       }
@@ -118,3 +118,10 @@ export default function Background({ children }) {
 TODO
 
 - https://github.com/kentcdodds/stop-runaway-react-effects
+
+## Code Check Point
+
+At this point in the Workshop you should be somewhere near the following checkpoint
+
+- [GitHub](https://github.com/elijahmanor/react-fun/tree/master/packages/03-intro-state-effects)
+- [CodeSandbox](https://codesandbox.io/s/github/elijahmanor/react-fun/tree/master/packages/03-intro-state-effects)

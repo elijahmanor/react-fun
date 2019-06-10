@@ -19,6 +19,19 @@ https://codesandbox.io/s/peaceful-water-x2rp4
 | Pure Component   |  Yes  |  -   |   -   |
 | Error Boundaries |  Yes  |  -   |   -   |
 
+### Props
+
+```jsx
+class Counter extends React.Component {
+  render() {
+    const { onClick, count } = this.props;
+    return <button onClick={onClick}>{count}</button>;
+  }
+}
+```
+
+### State
+
 ```jsx
 class Counter extends React.Component {
   state = { count: 0 };
@@ -30,6 +43,8 @@ class Counter extends React.Component {
   }
 }
 ```
+
+### Lifecycle Events and Side-Effects
 
 ```jsx
 class Counter extends React.Component {
@@ -43,6 +58,8 @@ class Counter extends React.Component {
   /* ... */
 }
 ```
+
+### Pure Component or shouldComponentUpdate
 
 ```jsx
 class Counter extends React.PureComponent {
@@ -62,6 +79,8 @@ class Counter extends React.PureComponent {
   /* ... */
 }
 ```
+
+### Error Boundaries
 
 ```jsx
 class ErrorBoundary extends React.Component {
@@ -90,6 +109,8 @@ class ErrorBoundary extends React.Component {
 | Side-Effects     |  Yes  | **No**  |   -   |
 | Pure Component   |  Yes  | **No**  |   -   |
 | Error Boundaries |  Yes  | **No**  |   -   |
+
+### Props
 
 ```jsx
 function Counter({ count, onClick }) {

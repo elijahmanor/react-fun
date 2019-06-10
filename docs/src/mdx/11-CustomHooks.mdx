@@ -1,5 +1,7 @@
 # Custom Hooks
 
+Let's update the KeyCode example we worked with before and pull out the state logic that handled listening to keydown and updating state.
+
 ```jsx
 const useDocumentKeyCode = () => {
   const [code, setCode] = useState("");
@@ -17,6 +19,8 @@ function KeyCode() {
 }
 ```
 
+In this case we could briefly tweak the custom hook so that it can serve a bigger service than just `code`.
+
 ```jsx
 const useDocumentKeyCodes = () => {
   const [codes, setCodes] = useState({});
@@ -32,7 +36,11 @@ const useDocumentKeyCodes = () => {
 
 ## Lab
 
+Let's update Tablar and use a custom hook to handle the `window.localStorage` logic in the `Background.js` Component.
+
 ### `customHooks.js`
+
+Create a new file called `customHooks.js` and add the following content...
 
 ```jsx
 import { useState, useEffect } from "react";
@@ -52,6 +60,8 @@ export const useLocalStorage = (key, defaultValue) => {
 
 ### `Background.js`
 
+Update `Background.js` to include the new `useLocalStorage` custom hook and use it throughout the Component.
+
 ```jsx
 import { useLocalStorage } from "./customHooks";
 
@@ -70,11 +80,21 @@ export default function Background({ children }) {
 
   useEffect(() => {
     const handleKey = ({ key, ctrlKey, metaKey }) => {
-      if (key === "b" && (metaKey || ctrlKey)) {
+      if (key === "b" && ctrlKey) {
         setUrl(UNSPLASH_COLLECTION);
       }
     };
     document.addEventListener("keydown", handleKey);
     return () => document.removeEventListener("keydown", handleKey);
   }, [setUrl]);
+
+  /* ... */
+}
 ```
+
+## Code Check Point
+
+At this point in the Workshop you should be somewhere near the following checkpoint
+
+- [GitHub](https://github.com/elijahmanor/react-fun/tree/master/packages/04-custom-hook)
+- [CodeSandbox](https://codesandbox.io/s/github/elijahmanor/react-fun/tree/master/packages/04-custom-hook)

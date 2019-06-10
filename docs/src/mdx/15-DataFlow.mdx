@@ -1,11 +1,10 @@
 # Data Flow
 
-> 1. Data Flow (up, down, etc...)
+In React it is very common to pass data down the React tree and also to pass it back up. In some cases we avoid "Prop Drilling" with Context or other techniques. Providing callback function are also a very common way to communicate with a parent that something has changed.
 
 ## Lab
 
-> 1. Lab 10 - Tic Tac Toe
->    Maybe talk about keys here?
+We are going to create a TicTacToe component and example how the state moves down and up the component tree.
 
 ### `TicTacToe.js`
 
@@ -120,6 +119,7 @@ export default function Game() {
   }
   function handleStart() {
     setSquares(Array(9).fill(null));
+    setIsXNext(true);
     setWinner(null);
   }
 
@@ -134,6 +134,12 @@ export default function Game() {
 ```
 
 ### `TicTacToe.scss`
+
+In order to get SASS to work, you'll need to install `node-sass`
+
+```shell
+npm install node-sass
+```
 
 ```jsx
 .Game {
@@ -295,3 +301,10 @@ export default function Tablar() {
   );
 }
 ```
+
+## Code Check Point
+
+At this point in the Workshop you should be somewhere near the following checkpoint
+
+- [GitHub](https://github.com/elijahmanor/react-fun/tree/master/packages/08-tic-tac-toe)
+- [CodeSandbox](https://codesandbox.io/s/github/elijahmanor/react-fun/tree/master/packages/08-tic-tac-toe)

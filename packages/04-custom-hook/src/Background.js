@@ -19,7 +19,7 @@ export default function Background({ children }) {
 
   useEffect(() => {
     const handleKey = ({ key, ctrlKey, metaKey }) => {
-      if (key === "b" && (metaKey || ctrlKey)) {
+      if (key === "b" && ctrlKey) {
         setUrl(UNSPLASH_COLLECTION);
       }
     };

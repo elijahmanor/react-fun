@@ -2,7 +2,18 @@
 
 <!-- https://codesandbox.io/s/n95ljrng2 -->
 
+You can use the following CodeSandbox as a starting point for the following two exercises.
+
+<a href="https://codesandbox.io/s/busy-water-mlkgx?fontsize=14">
+  <img
+    alt="Edit MemeGenerator Starter"
+    src="https://codesandbox.io/static/img/play-codesandbox.svg"
+  />
+</a>
+
 ## Controlled Forms
+
+A controlled form element is one where React takes control of assigning its value and listening to its changes. In this way, React can know the form element's state at any moment. You typically want this type of behavior so that you can do validation and other type of logic.
 
 ```jsx
 import MemeGenerator from "./MemeGenerator";
@@ -33,6 +44,10 @@ function App() {
 ```
 
 ## Uncontrolled Forms
+
+However, there are some times (although rarely) where you may want to work outside of React and you only want to know the state at a certain point in time. The following example shows how to do that.
+
+This code snippet introduces a new concept called a `ref` that enables you to grab a handle at a DOM element.
 
 ```jsx
 function App() {
@@ -65,6 +80,8 @@ function App() {
 ```
 
 ## Lab
+
+Let's update Tablar to allow the user to customize the greeting message.
 
 ### `Greeting.js`
 
@@ -162,3 +179,10 @@ export default function Tablar() {
   );
 }
 ```
+
+## Code Check Point
+
+At this point in the Workshop you should be somewhere near the following checkpoint
+
+- [GitHub](https://github.com/elijahmanor/react-fun/tree/master/packages/06-forms)
+- [CodeSandbox](https://codesandbox.io/s/github/elijahmanor/react-fun/tree/master/packages/06-forms)
