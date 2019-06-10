@@ -3,7 +3,6 @@
 ```jsx
 function Counter() {
   // Call useState passing initial value.
-  // It returns an array with two items.
   const state = React.useState(0);
 
   // 1st item is the current value
@@ -63,7 +62,7 @@ const [state, setState] = React.useReducer(
 
 Let's create our own `useState` function and see what is going on.
 
-**NOTE**: The following code is oversimplified, but intended to convey the idea of what is going on behind the scenese.
+**NOTE**: The following code is oversimplified, but intended to convey the idea of what is going on behind the scenes.
 
 ### Support One State
 
@@ -90,7 +89,7 @@ function reRender() {
 reRender();
 ```
 
-## Support Multiple States
+### Support Multiple States
 
 ```js
 const hooks = [];

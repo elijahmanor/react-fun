@@ -8,6 +8,8 @@ Side effects are things that don't directly apply to the function itself. Some e
 
 If you have experience with Class Components, you may have done some of these in `componentDidMoutn`, `componentDidUpdate`, or `componentWillUnmount`.
 
+## Class KeyCode Component with Side-Effects
+
 ```jsx
 class KeyCode extends React.Component {
   state = { code: "" };
@@ -25,7 +27,7 @@ class KeyCode extends React.Component {
 }
 ```
 
-## Converting to useEffect
+## Convert KeyCode to Function Component with useEffect Hook
 
 ```jsx
 function KeyCode() {
@@ -43,9 +45,9 @@ function KeyCode() {
 
 ## Lab
 
-### Update Time
-
 #### `Tablar.js`
+
+We are going to make it so that Tablar updates the display as time progresses.
 
 ```jsx
 export default function Tablar() {
@@ -61,9 +63,9 @@ export default function Tablar() {
 }
 ```
 
-### Add Background with Local Storage
-
 #### `Background.js`
+
+Next we will pull a nice background image from unsplash and save the URL in localStorage. We'll also make a keyboard shortcut so that you can refresh to a new background.
 
 ```jsx
 const UNSPLASH_COLLECTION =
