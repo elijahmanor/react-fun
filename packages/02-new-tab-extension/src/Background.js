@@ -21,7 +21,7 @@ function Ball() {
     />
   );
 }
-const balls = [...Array(100)].map((_, i) => <Ball index={i} />);
+const balls = [...Array(100)].map((_, i) => <Ball index={i} key={i} />);
 
 export default function Background({ children }) {
   return (

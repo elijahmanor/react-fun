@@ -155,8 +155,22 @@ function Ball({ index }) {
     </div>
   );
 }
-const balls = [...Array(10)].map((_, i) => <Ball index={i} />);
+const balls = [...Array(10)].map((_, i) => <Ball index={i} key={i} />);
 ReactDOM.render(<main>{balls}</main>, document.getElementById("app"));
+```
+
+### Alternative Array Methods
+
+Just for fun, here are some other ways you could have built the array of items. This can be handy when making fake data or building a game board or something.
+
+```jsx
+const balls = Array.from({ length: 100 }, (_, i) => <Ball index={i} key={i} />);
+```
+
+```jsx
+const balls = Array(100)
+  .fill(null)
+  .map((_, i) => <Ball index={i} key={i} />);
 ```
 
 <!-- TODO

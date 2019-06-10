@@ -17,6 +17,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 // import { Router, Link, navigate } from "@reach/router";
 import "prism-themes/themes/prism-darcula.css";
 
+const version = "v2.1.0";
 const drawerWidth = 240;
 // const basepath = window.location.pathname;
 
@@ -193,7 +194,7 @@ function ResponsiveDrawer(props) {
           alignItems: "center"
         }}
       >
-        <span style={{ margin: "1rem", color: "#666" }}>v2.0.0</span>
+        <span style={{ margin: "1rem", color: "#666" }}>{version}</span>
         {hasNext && (
           <button
             style={{ fontSize: "2rem", border: "transparent" }}
