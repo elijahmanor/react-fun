@@ -17,7 +17,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 // import { Router, Link, navigate } from "@reach/router";
 import "prism-themes/themes/prism-darcula.css";
 
-const version = "v2.2.0";
+const version = "v2.2.1";
 const drawerWidth = 240;
 // const basepath = window.location.pathname;
 
