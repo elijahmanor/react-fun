@@ -17,7 +17,8 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 // import { Router, Link, navigate } from "@reach/router";
 import "prism-themes/themes/prism-darcula.css";
 
-const version = "v2.2.1";
+const version = "v2.3.0";
+const date = "Nov 21, 2019";
 const drawerWidth = 240;
 // const basepath = window.location.pathname;
 
@@ -190,10 +191,19 @@ function ResponsiveDrawer(props) {
           alignItems: "center"
         }}
       >
-        <span style={{ margin: "1rem", color: "#666" }}>{version}</span>
+        <span
+          style={{ cursor: "help", margin: "1rem", color: "#666" }}
+          title={date}
+        >
+          {version}
+        </span>
         {hasNext && (
           <button
-            style={{ fontSize: "2rem", border: "transparent" }}
+            style={{
+              cursor: "pointer",
+              fontSize: "2rem",
+              border: "transparent"
+            }}
             onClick={handleNext}
           >
             <i className="material-icons">keyboard_arrow_right</i>
@@ -255,7 +265,7 @@ function ResponsiveDrawer(props) {
             </a>
             <a
               href="https://twitter.com/elijahmanor?ref_src=twsrc%5Etfw"
-              class="twitter-follow-button"
+              className="twitter-follow-button"
               data-size="large"
               data-show-count="false"
             >
