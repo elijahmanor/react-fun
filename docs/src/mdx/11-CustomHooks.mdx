@@ -68,25 +68,33 @@ export const useLocalStorage = (key, defaultValue) => {
 
 Update `Background.js` to include the new `useLocalStorage` custom hook and use it throughout the Component.
 
-```jsx
-import { useLocalStorage } from "./customHooks";
+```diff
+- import React, { useState, useEffect } from "react";
++ import React, { useEffect } from "react";
++ import { useLocalStorage } from "./customHooks";
+/* ... */
 
 export default function Background({ children }) {
-  const [url, setUrl] = useLocalStorage("backgroundImage", UNSPLASH_COLLECTION);
+-  const defaultUrl =
+-    window.localStorage.getItem("backgroundImage") || UNSPLASH_COLLECTION;
+-  const [url, setUrl] = useState(defaultUrl);
++  const [url, setUrl] = useLocalStorage("backgroundImage", UNSPLASH_COLLECTION);
 
   useEffect(() => {
     async function getUrl() {
       if (url === UNSPLASH_COLLECTION) {
         const response = await window.fetch(UNSPLASH_COLLECTION);
+-        window.localStorage.setItem("backgroundImage", response.url);
         setUrl(response.url);
       }
     }
     getUrl();
-  }, [setUrl, url]);
+  }, [url, setUrl]);
 
   useEffect(() => {
     const handleKey = ({ key, ctrlKey, metaKey }) => {
       if (key === "b" && ctrlKey) {
+-        window.localStorage.removeItem("backgroundImage");
         setUrl(UNSPLASH_COLLECTION);
       }
     };

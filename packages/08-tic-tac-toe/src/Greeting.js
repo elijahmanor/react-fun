@@ -36,7 +36,7 @@ export default function Greeting({ name, onChange }) {
           onDoubleClick={() => setIsEditing(true)}
           data-testid="greeting-label"
         >
-          {greetingTime(new Date())}, {name}!
+          {greetingTime(new Date())}{name && `, ${name}`}!
         </h1>
       )}
     </div>

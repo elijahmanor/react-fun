@@ -32,7 +32,7 @@ export default function Greeting({ name, onChange }) {
         />
       ) : (
         <h1 onDoubleClick={() => setIsEditing(true)}>
-          {greetingTime(new Date())}, {name}!
+          {greetingTime(new Date())}{name && `, ${name}`}!
         </h1>
       )}
     </div>

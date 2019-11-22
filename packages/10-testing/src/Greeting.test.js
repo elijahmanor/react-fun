@@ -5,22 +5,23 @@ import {
   cleanup,
   waitForElement
 } from "@testing-library/react";
-import "jest-dom/extend-expect";
+import "@testing-library/jest-dom/extend-expect";
 import Greeting from "./Greeting";
 
 afterEach(cleanup);
 
 jest.mock("greeting-time", () => jest.fn(() => "Howdy"));
 
-describe.each([["empty", ""], ["null", null], ["undefined", undefined]])(
-  "when %s is provided for name",
-  (_, value) => {
-    test(`should show input`, () => {
-      const { getByTestId } = render(<Greeting name="" />);
-      expect(getByTestId("greeting-text")).toHaveAttribute("value", "");
-    });
-  }
-);
+describe.each([
+  ["empty", ""],
+  ["null", null],
+  ["undefined", undefined]
+])("when %s is provided for name", (_, value) => {
+  test(`should show input`, () => {
+    const { getByTestId } = render(<Greeting name="" />);
+    expect(getByTestId("greeting-text")).toHaveAttribute("value", "");
+  });
+});
 
 test("should render the provided name", () => {
   const { getByTestId } = render(<Greeting name="Elijah" />);

@@ -36,6 +36,70 @@ npm start
 yarn start
 ```
 
+## Before we Gut Everything, Let's Have Fun with SVGs
+
+### Update `App.js`
+
+```diff
+import React from 'react';
+- import logo from './logo.svg';
++ import logo, { ReactComponent as ReactLogo } from './logo.svg';
+import './App.css';
+
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
++        <ReactLogo className="App-logo" title="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
+}
+
+export default App;
+```
+
+### Append `App.css`
+
+```css
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+}
+
+.App-logo path {
+  stroke: palegoldenrod;
+  stroke-width: 1px;
+  fill: none;
+  stroke-dasharray: 35px 15px;
+  animation: orbit 1s infinite linear;
+}
+
+@keyframes orbit { to { stroke-dashoffset: 50px; } }
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+```
+
+## Okay, Back to the Normal Lab
+
 ### Append `index.css`
 
 ```css
@@ -91,6 +155,35 @@ export default function Background({ children }) {
 }
 ```
 
+### New `Tablar.js`
+
+```jsx
+import React from "react";
+import Background from "./Background";
+
+import "./Tablar.css";
+
+export default function Tablar() {
+  const dateTime = new Date();
+  const time = dateTime.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "numeric"
+  });
+  const [hourMinute, amPm] = time.split(" ");
+
+  return (
+    <Background>
+      <header className="Tablar-header">
+        <h1 className="Tablar-time">
+          <span>{hourMinute}</span> <span>{amPm}</span>
+        </h1>
+        <h1 className="Tablar-message">Hello, Workshop!</h1>
+      </header>
+    </Background>
+  );
+}
+```
+
 ### New `Tablar.css`
 
 ```css
@@ -125,35 +218,6 @@ export default function Background({ children }) {
   font-size: 3rem;
   margin: 1rem 0;
   cursor: pointer;
-}
-```
-
-### New `Tablar.js`
-
-```jsx
-import React from "react";
-import Background from "./Background";
-
-import "./Tablar.css";
-
-export default function Tablar() {
-  const dateTime = new Date();
-  const time = dateTime.toLocaleTimeString("en-US", {
-    hour: "numeric",
-    minute: "numeric"
-  });
-  const [hourMinute, amPm] = time.split(" ");
-
-  return (
-    <Background>
-      <header className="Tablar-header">
-        <h1 className="Tablar-time">
-          <span>{hourMinute}</span> <span>{amPm}</span>
-        </h1>
-        <h1 className="Tablar-message">Hello, Workshop!</h1>
-      </header>
-    </Background>
-  );
 }
 ```
 
@@ -206,6 +270,19 @@ npm run build
 
 yarn run build
 ```
+
+### Test the Build
+
+Before we install our extension, try giving the production version a run locally. The following commands will build and serve the files locally with a simple HTTP server.
+
+```shell
+cd build
+npx serve
+```
+
+### Install the Unpacked Extension
+
+This extension should now work in Chrome and Edge. You can find instructions on how to load a developer unpacked extension from the [developer chrome site](https://developer.chrome.com/extensions/getstarted#manifest).
 
 ## Code Check Point
 

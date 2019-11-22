@@ -191,9 +191,9 @@ export default function Tablar() {
         <Icon type="ticTacToe" title="Tic Tac Toe" width="1rem" height="1rem" />
       </button>
       <header
-        className={`mm Tablar-header ${
-          isDarkMode ? "Tablar-header--dark" : null
-        }`}
+        className={classNames("mm Tablar-header", {
+          "Tablar-header--dark": isDarkMode
+        })}
       >
         {/* .. */}
       </header>
@@ -211,13 +211,7 @@ export default function Tablar() {
           height="1rem"
         />
       </button>
-      <Dialog
-        aria-label="Tic-Tac-Toe"
-        isOpen={showTicTacToe}
-        onDismiss={() => toggleTicTacToe(false)}
-      >
-        <TicTacToe />
-      </Dialog>
+      {/* ... */}
       <IconLibrary />
     </Background>
   );

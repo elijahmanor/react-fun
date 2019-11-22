@@ -36,6 +36,8 @@ Update TicTacToe.js to useReducer instead of multiple useState
 
 ### Update `TicTacToe.js`
 
+**NOTE**: Using VS Code's Shift-Option or Shift-Alt feature to select vertical selections may come in handy.
+
 ```diff
 - import React, { useState } from "react";
 + import React, { useReducer } from "react";
@@ -64,8 +66,6 @@ Update TicTacToe.js to useReducer instead of multiple useState
 +       throw new Error();
 +   }
 + }
-
-/* ... */
 
 export default function Game() {
 -  const [squares, setSquares] = useState(Array(9).fill(null));
@@ -196,9 +196,6 @@ export default function Background({ children }) {
 +    dispatch,
 +    isDarkMode
 +  } = useSettings()
-+}
-
-  console.log({ isDarkMode });
 
   useEffect(() => {
     async function getUrl() {
@@ -212,7 +209,7 @@ export default function Background({ children }) {
     }
     getUrl();
 -  }, [setUrl, url]);
-+  }, [dispatch, cachedBackgroundUrl, collectionBackgroundUrl])
++  }, [cachedBackgroundUrl, collectionBackgroundUrl, dispatch])
 
   useEffect(() => {
     const handleKey = ({ key, ctrlKey, metaKey }) => {
