@@ -209,6 +209,40 @@ export default function Background({ children }) {
 
 ```diff
 -import { useLocalStorage } from "./customHooks"
+
+export default function Tablar() {
+  /* ... */
+
+-  const [name, setName] = useLocalStorage("name", "");
+-  const [isDarkMode, toggleDarkMode] = useSettings()
++  const { name, isDarkMode, toggleDarkMode, dispatch } = useSettings();
+}
+
+  /* ... */
+
+  return (
+    <Background>
+      <header
+        className={`Tablar-header ${isDarkMode ? "Tablar-header--dark" : null}`}
+      >
+        <h1 className="Tablar-time">
+          <span>{hourMinute}</span> <span>{amPm}</span>
+        </h1>
+        <Greeting
+          name={name}
+-          onChange={name => setName(name)}
++          onChange={name => dispatch({ type: "SET_NAME", name })}
+        />
+      </header>
+      <Dialog
+        aria-label="Tic-Tac-Toe"
+        isOpen={showTicTacToe}
+        onDismiss={() => toggleTicTacToe(false)}
+      >
+        <TicTacToe />
+      </Dialog>
+    </Background>
+  );
 ```
 
 ## Code Check Point
