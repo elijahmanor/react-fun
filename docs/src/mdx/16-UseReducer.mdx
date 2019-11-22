@@ -36,44 +36,63 @@ Update TicTacToe.js to useReducer instead of multiple useState
 
 ### Update `TicTacToe.js`
 
-```jsx
-import React, { useReducer } from "react";
+```diff
+- import React, { useState } from "react";
++ import React, { useReducer } from "react";
 
 /* ... */
 
-const initialState = {
-  squares: Array(9).fill(null),
-  isXNext: true,
-  winner: ""
-};
++ const initialState = {
++   squares: Array(9).fill(null),
++   isXNext: true,
++   winner: ""
++ };
 
-function gameReducer(state, action) {
-  switch (action.type) {
-    case "START":
-      return initialState;
-    case "MOVE":
-      const moves = [...state.squares];
-      moves[action.index] = state.isXNext ? "X" : "O";
-      return {
-        squares: moves,
-        isXNext: !state.isXNext,
-        winner: calculateWinner(moves)
-      };
-    default:
-      throw new Error();
-  }
-}
++ function gameReducer(state, action) {
++   switch (action.type) {
++     case "START":
++       return initialState;
++     case "MOVE":
++       const moves = [...state.squares];
++       moves[action.index] = state.isXNext ? "X" : "O";
++       return {
++         squares: moves,
++         isXNext: !state.isXNext,
++         winner: calculateWinner(moves)
++       };
++     default:
++       throw new Error();
++   }
++ }
 
 /* ... */
 
 export default function Game() {
-  const [{ winner, squares, isXNext }, dispatch] = useReducer(
-    gameReducer,
-    initialState
-  );
+-  const [squares, setSquares] = useState(Array(9).fill(null));
+-  const [isXNext, setIsXNext] = useState(true);
+-  const [winner, setWinner] = useState("");
++  const [{ winner, squares, isXNext }, dispatch] = useReducer(
++    gameReducer,
++    initialState
++  );
 
-  const handleClick = index => dispatch({ type: "MOVE", index });
-  const handleStart = () => dispatch({ type: "START" });
+-  function handleClick(i) {
+-    const moves = [...squares];
+-    moves[i] = isXNext ? "X" : "O";
+-    setSquares(moves);
+-    setIsXNext(!isXNext);
+-    const winner = calculateWinner(moves);
+-    if (winner) {
+-      setWinner(winner);
+-    }
+-  }
+-  function handleStart() {
+-    setSquares(Array(9).fill(null));
+-    setIsXNext(true);
+-    setWinner(null);
+-  }
++  const handleClick = index => dispatch({ type: "MOVE", index });
++  const handleStart = () => dispatch({ type: "START" });
 
   /* ... */
 }
@@ -162,6 +181,10 @@ export const useReducerWithLocalStorage = (reducer, key, defaultValue) => {
 ## Update `Background.js`
 
 ```diff
+import React, { useEffect } from "react";
+-import { useLocalStorage } from "./customHooks";
+import { useSettings } from "./SettingsContext";
+
 - const UNSPLASH_COLLECTION =
 -   "https://source.unsplash.com/collection/3802293/1600x900";
 export default function Background({ children }) {

@@ -42,7 +42,11 @@ Let's update Tablar and use a custom hook to handle the `window.localStorage` lo
 
 Create a new file called `customHooks.js` and add the following content...
 
-**NOTE:** You'll need to clear out the localStorage since this reads and stores JSON
+**NOTE:** You'll need to clear out the localStorage since this reads and stores JSON. You can easily do that from the console or from the DevTools Application tab.
+
+```js
+window.localStorage.clear();
+```
 
 ```jsx
 import { useState, useEffect } from "react";
