@@ -10,7 +10,7 @@ Inline SVGs can be very powerful in conjuction with CSS. Check out the following
 
 Adding a SVG Library to Tablar. This will be a somewhat manual process, but it provides a lot of flexibility.
 
-### `Icon.js`
+### New `Icon.js`
 
 ```jsx
 import React from "react";
@@ -82,7 +82,7 @@ export const Icon = props => {
 };
 ```
 
-### `Tablar.css`
+### Append `Tablar.css`
 
 ```css
 .Background {
@@ -176,7 +176,7 @@ export const Icon = props => {
 }
 ```
 
-### `Tablar.js`
+### Update `Tablar.js`
 
 ```jsx
 /* ... */
@@ -211,7 +211,11 @@ export default function Tablar() {
           height="1rem"
         />
       </button>
-      <Dialog isOpen={showTicTacToe} onDismiss={() => toggleTicTacToe(false)}>
+      <Dialog
+        aria-label="Tic-Tac-Toe"
+        isOpen={showTicTacToe}
+        onDismiss={() => toggleTicTacToe(false)}
+      >
         <TicTacToe />
       </Dialog>
       <IconLibrary />

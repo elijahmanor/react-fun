@@ -8,6 +8,47 @@ Side effects are things that don't directly apply to the function itself. Some e
 
 If you have experience with Class Components, you may have done some of these in `componentDidMoutn`, `componentDidUpdate`, or `componentWillUnmount`.
 
+## What Does it Look Like?
+
+In it's simpliest form, it takes a function as a callback that will be excuted after React has updated the DOM.
+
+```jsx
+import React, { useEffect } from "react";
+
+function Counter() {
+  useEffect(() => {}); // Accepts a callback function
+  return /* ... */;
+}
+```
+
+You can return an optional function to serve as a clean-up function. React calls the clean-up function when the component unmounts. It will also execute the clean-up function before running the effect again.
+
+```jsx
+import React, { useEffect } from "react";
+
+function Counter() {
+  useEffect(() => {
+    // Side-effect code goes here
+    return () => {}; // If you return a function it's clean-up
+  });
+  return /* ... */;
+}
+```
+
+If you don't provide a 2nd parameter to useEffect it will execute after every render, not just once. You can optionally provide a second parameter to determine how frequently the effect is executed.
+
+```jsx
+import React, { useEffect } from "react";
+
+function Counter() {
+  useEffect(() => {
+    /* ... */
+    return () => {};
+  }, [additional, args, go, here]); // Optional dep array to adjust frequency
+  return /* ... */;
+}
+```
+
 ## Class KeyCode Component with Side-Effects
 
 ```jsx
@@ -43,6 +84,17 @@ function KeyCode() {
 }
 ```
 
+## Example
+
+You can use the following Codesandbox to follow along with the context code examples.
+
+<a href="https://codesandbox.io/s/vvj1zq2v1l?fontsize=14" target="_blank">
+  <img
+    alt="Edit React Hooks Demo"
+    src="https://codesandbox.io/static/img/play-codesandbox.svg"
+  />
+</a>
+
 ## Lab
 
 #### `Tablar.js`
@@ -63,11 +115,13 @@ export default function Tablar() {
 }
 ```
 
-#### `Background.js`
+#### Replace `Background.js`
 
 Next we will pull a nice background image from unsplash and save the URL in localStorage. We'll also make a keyboard shortcut so that you can refresh to a new background.
 
 ```jsx
+import React from "react";
+
 const UNSPLASH_COLLECTION =
   "https://source.unsplash.com/collection/3802293/1600x900";
 

@@ -13,10 +13,23 @@ Let's take some of the concepts we just learned and start a new project and turn
 As long as you have `npm` version 5.2 or above, you should have a tool called `npx` already installed. It's a handy way to interact with `npm` without having to globally install modules or simplify interactiving with local modules from the command-line. If you are curious I have a [free course](https://egghead.io/courses/execute-npm-package-binaries-with-the-npx-package-runner) all about `npx` on [Egghead.io](https://egghead.io) that you can watch.
 
 ```shell
-npx create-react-app Tablar
+npm i create-react-app -g
+create-react-app tablar && cd $_
+# OR
+npx create-react-app tablar && cd $_
+# OR
+npm init react-app tablar && cd $_
 ```
 
-### `index.css`
+### Start the Development Server
+
+```shell
+npm start
+# OR
+yarn start
+```
+
+### Append `index.css`
 
 ```css
 :root {
@@ -29,10 +42,11 @@ body,
   height: 100%;
   width: 100%;
   padding: 0;
+  margin: 0;
 }
 ```
 
-### `Background.js`
+### New `Background.js`
 
 ```jsx
 import React from "react";
@@ -58,7 +72,7 @@ function Ball() {
     />
   );
 }
-const balls = [...Array(100)].map((_, i) => <Ball index={i} />);
+const balls = [...Array(100)].map((_, i) => <Ball key={i} />);
 
 export default function Background({ children }) {
   return (
@@ -70,7 +84,7 @@ export default function Background({ children }) {
 }
 ```
 
-### `Tablar.css`
+### New `Tablar.css`
 
 ```css
 .Background {
@@ -107,7 +121,7 @@ export default function Background({ children }) {
 }
 ```
 
-### `Tablar.js`
+### New `Tablar.js`
 
 ```jsx
 import React from "react";
@@ -136,7 +150,7 @@ export default function Tablar() {
 }
 ```
 
-### `App.js`
+### Replace `App.js`
 
 ```jsx
 import React from "react";
@@ -150,7 +164,7 @@ function App() {
 export default App;
 ```
 
-### `public/manifest.json`
+### Replace `public/manifest.json`
 
 ```js
 {
@@ -166,13 +180,23 @@ export default App;
 }
 ```
 
+![](./images/ryanflorence-javascript.png)
+
+### New `.env.production`
+
+Chrome doesn't like extensions to have inline JavaScript. You'll get a security error if you do. So if you set the following environment variable, then create-react-app will not inline the runtime logic. This is necessary before loading the extension to your browser.
+
+```shell
+INLINE_RUNTIME_CHUNK=false
+```
+
 ### Build React App and Install Extension
 
 ```shell
 npm run build
+# OR
+yarn run build
 ```
-
-![](./images/ryanflorence-javascript.png)
 
 ## Code Check Point
 

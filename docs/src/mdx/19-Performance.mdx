@@ -10,7 +10,7 @@ If you have determined a section of your App that is rendering too much, you can
 
 ## Lab
 
-### `TicTacToe.js`
+### Update `TicTacToe.js`
 
 NOTE: The following exercise is overkill and I'm not concerned about the performance of the TicTacToe component, but I do want to show the technqiues that can could help improve performance.
 
@@ -23,7 +23,7 @@ function Square({ value, index, onClick }) {
 }
 ```
 
-### `TicTacToe.js`
+### Update `TicTacToe.js`
 
 Our first attempt to reduce the re-rendering of the Square component is going to be using the `React.memo` Higher Order Compnent (HOC).
 
@@ -40,7 +40,7 @@ const Square = memo(({ value, index, onClick }) => {
 
 Well, that didn't work did it? Why is that? It turns out that we are passing a new onClick function reference each time so `memo` thinks it should actually render it.
 
-### `TicTacToe.js`
+### Update `TicTacToe.js`
 
 #### Fix #1
 
@@ -63,21 +63,9 @@ const Square = memo(
   },
   (prev, next) => prev.value === next.value
 );
-
-/* ... */
-
-export default function Game() {
-  /* ... */
-
-  /* Option 1 - memo with areEqual 2nd argument */
-  const handleClick = index => dispatch({ type: "MOVE", index });
-  const handleStart = () => dispatch({ type: "START" });
-
-  /* ... */
-}
 ```
 
-### `TicTacToe.js`
+### Update `TicTacToe.js`
 
 #### Fix #2
 

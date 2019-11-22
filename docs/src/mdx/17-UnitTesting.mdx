@@ -19,7 +19,11 @@ Add unit tests for the `Greeting` React component
 ### Install Dependencies
 
 ```
-npm install @testing-library/react jest-dom --save-dev
+npm install @testing-library/react @testing-library/jest-dom --save-dev
+# OR
+npm i @testing-library{react,jest-dom} -D
+# OR
+yarn add @testing-library{react,jest-dom} --dev
 ```
 
 ### Run Tests
@@ -28,7 +32,7 @@ npm install @testing-library/react jest-dom --save-dev
 npm test
 ```
 
-### `Greeting.test.js`
+### New `Greeting.test.js`
 
 ```js
 import React from "react";
@@ -45,15 +49,16 @@ afterEach(cleanup);
 
 jest.mock("greeting-time", () => jest.fn(() => "Howdy"));
 
-describe.each([["empty", ""], ["null", null], ["undefined", undefined]])(
-  "when %s is provided for name",
-  (_, value) => {
-    test(`should show input`, () => {
-      const { getByTestId } = render(<Greeting name="" />);
-      expect(getByTestId("greeting-text")).toHaveAttribute("value", "");
-    });
-  }
-);
+describe.each([
+  ["empty", ""],
+  ["null", null],
+  ["undefined", undefined]
+])("when %s is provided for name", (_, value) => {
+  test(`should show input`, () => {
+    const { getByTestId } = render(<Greeting name="" />);
+    expect(getByTestId("greeting-text")).toHaveAttribute("value", "");
+  });
+});
 
 test("should render the provided name", () => {
   const { getByTestId } = render(<Greeting name="Elijah" />);
@@ -101,6 +106,24 @@ describe("when rendering an input", () => {
     expect(onChange).toHaveBeenCalledWith("Test");
   });
 });
+```
+
+## Update `Greeting.js`
+
+To help assist with testing we will add some special data attributes to the items that we are testing. If you'd like these to be removed in production you can use the [babel-plugin-react-remove-properties](https://www.npmjs.com/package/babel-plugin-react-remove-properties).
+
+```js
+/* ... */
+return (
+  <div className="Greeting">
+    {isEditing ? (
+      <input data-testid="greeting-text" />
+    ) : (
+      <h1 data-testid="greeting-label">{/* ... */}</h1>
+    )}
+  </div>
+);
+/* ... */
 ```
 
 ## Code Check Point

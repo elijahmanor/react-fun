@@ -11,32 +11,83 @@ You can use the following CodeSandbox as a starting point for the following two 
   />
 </a>
 
+## Form with a Bug
+
+There are Controlled form, uncontrolled forms, and something inbetween that is very annoying (partially controlled).
+
+```jsx
+import React, { useState, useEffect, Fragment } from "react";
+import MemeGenerator from "./MemeGenerator";
+import { MEMES } from "./Constants";
+import { sample } from "lodash";
+
+import "./styles.css";
+
+export default function App() {
+  const [image, setImage] = useState(sample(MEMES));
+  const [topText, setTopText] = useState("");
+  const [lowText, setLowText] = useState("");
+  const [itsATrap, setItsATrap] = useState(false);
+  const handlRandomize = e => {
+    e.preventDefault();
+    setImage(sample(MEMES));
+  };
+  return (
+    <div className="App">
+      <MemeGenerator src={image} topText={topText} lowText={lowText} />
+      <form className="App-form" onSubmit={handlRandomize}>
+        <label htmlFor="topText">Top Text</label>
+        <input type="text" id="topText" value={topText} />
+        <label htmlFor="lowText">Low Text</label>
+        <input type="text" id="lowText" value={lowText} />
+        <button>Randomize</button>
+      </form>
+    </div>
+  );
+}
+```
+
 ## Controlled Forms
 
 A controlled form element is one where React takes control of assigning its value and listening to its changes. In this way, React can know the form element's state at any moment. You typically want this type of behavior so that you can do validation and other type of logic.
 
 ```jsx
+import React, { useState } from "react";
+import { sample } from "lodash";
 import MemeGenerator from "./MemeGenerator";
+import { MEMES } from "./Constants";
 
-function App() {
+export default function App({ meme }) {
+  const [image, setImage] = useState(sample(MEMES));
   const [topText, setTopText] = useState("");
   const [lowText, setLowText] = useState("");
+  const handleSubmit = e => {
+    e.preventDefault();
+    setImage(sample(MEMES));
+  };
   const handleChange = ({ target: { id, value } }) => {
     const updater = id === "topText" ? setTopText : setLowText;
     updater(value);
   };
   return (
-    <div style={{ display: "flex" }}>
-      <MemeGenerator
-        image="https://i.chzbgr.com/..."
-        topText={topText}
-        lowText={lowText}
-      />
-      <form className="App-form">
+    <div className="App">
+      <MemeGenerator src={image} topText={topText} lowText={lowText} />
+      <form className="App-form" onSubmit={handleSubmit}>
         <label htmlFor="topText">Top Text</label>
-        <input id="topText" value={topText} onChange={handleChange} />
+        <input
+          type="text"
+          id="topText"
+          value={topText}
+          onChange={handleChange}
+        />
         <label htmlFor="lowText">Low Text</label>
-        <input id="lowText" value={lowText} onChange={handleChange} />
+        <input
+          type="text"
+          id="lowText"
+          value={lowText}
+          onChange={handleChange}
+        />
+        <button>Randomize</button>
       </form>
     </div>
   );
@@ -50,29 +101,33 @@ However, there are some times (although rarely) where you may want to work outsi
 This code snippet introduces a new concept called a `ref` that enables you to grab a handle at a DOM element.
 
 ```jsx
-function App() {
+import React, { useState, useRef } from "react";
+import MemeGenerator from "./MemeGenerator";
+import { MEMES } from "./Constants";
+import { sample } from "lodash";
+
+export default function App() {
+  const [meme, setMeme] = useState(sample(MEMES));
   const [topText, setTopText] = useState("");
+  const topRef = useRef();
   const [lowText, setLowText] = useState("");
-  const topTextRef = useRef();
-  const lowTextRef = useRef();
+  const lowRef = useRef();
   const handleSubmit = e => {
     e.preventDefault();
-    setTopText(topTextRef.current.value);
-    setLowText(lowTextRef.current.value);
+    setTopText(topRef.current.value);
+    setLowText(lowRef.current.value);
   };
+  const handleMeme = () => setMeme(sample(MEMES));
   return (
-    <div style={{ display: "flex" }}>
-      <MemeGenerator
-        image="https://i.chzbgr.com/..."
-        topText={topText}
-        lowText={lowText}
-      />
+    <div className="App">
+      <MemeGenerator src={meme} topText={topText} lowText={lowText} />
       <form className="App-form" onSubmit={handleSubmit}>
         <label htmlFor="topText">Top Text</label>
-        <input type="text" id="topText" ref={topTextRef} />
+        <input type="text" id="topText" ref={topRef} />
         <label htmlFor="lowText">Low Text</label>
-        <input type="text" id="lowText" ref={lowTextRef} />
-        <button>Generate</button>
+        <input type="text" id="lowText" ref={lowRef} />
+        <button type="submit">Update</button>
+        <button onClick={handleMeme}>Randomize</button>
       </form>
     </div>
   );
@@ -83,11 +138,21 @@ function App() {
 
 Let's update Tablar to allow the user to customize the greeting message.
 
-### `Greeting.js`
+### New `Greeting.js`
+
+We'll need to install `greeting-time` for the `Greeting` component.
+
+```shell
+npm i greeting-time
+# OR
+yarn add greeting-time
+```
 
 ```jsx
 import React, { useState, useRef, useEffect } from "react";
 import greetingTime from "greeting-time";
+
+import "./Greeting.css";
 
 function isInIframe() {
   try {
@@ -98,7 +163,7 @@ function isInIframe() {
 }
 
 export default function Greeting({ name, onChange }) {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(!name);
   const input = useRef();
   useEffect(() => {
     if (isEditing) {
@@ -128,7 +193,7 @@ export default function Greeting({ name, onChange }) {
 }
 ```
 
-### `Tablar.css`
+### New `Greeting.css`
 
 ```css
 .Greeting h1 {
@@ -156,7 +221,7 @@ export default function Greeting({ name, onChange }) {
 }
 ```
 
-### `Tablar.js`
+### Update `Tablar.js`
 
 ```diff
 +import Greeting from "./Greeting";

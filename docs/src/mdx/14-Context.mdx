@@ -203,7 +203,15 @@ const LocaleSwitcher = memo(props => {
 
 Add a Settings Context to the Tablar program.
 
-### `SettingsContext.js`
+### New `SettingsContext.js`
+
+We will be using the `use-dark-mode` dependency to detect Operating Sytem level dark mode support.
+
+```shell
+npm i use-dark-mode
+# OR
+yarn add use-dark-mode
+```
 
 ```jsx
 import React from "react";
@@ -231,7 +239,7 @@ function SettingsProvider(props) {
 export { SettingsProvider, useSettings };
 ```
 
-### `App.js`
+### Update `App.js`
 
 ```jsx
 import { SettingsProvider } from "./SettingsContext";
@@ -247,7 +255,7 @@ function App() {
 }
 ```
 
-### `Background.js`
+### Update `Background.js`
 
 ```jsx
 import { useSettings } from "./SettingsContext";
@@ -281,7 +289,15 @@ export default function Background({ children }) {
 }
 ```
 
-### `Tablar.js`
+### Update `Tablar.js`
+
+We will use the `react-hotekeys-hook` 3rd-Party dependency for this Component.
+
+```shell
+npm i react-hotkeys-hook
+# OR
+yarn add react-hotkeys-hook
+```
 
 ```jsx
 /* ... */
@@ -309,7 +325,35 @@ export default function Tablar() {
 }
 ```
 
-### `Tablar.css`
+### Add `classnames` to `Tablar.js`
+
+```shell
+npm i classnames
+# OR
+yarn add classnames
+```
+
+```jsx
+import classNames from "classnames";
+
+export default function Tablar() {
+  /* ... */
+
+  return (
+    <Background>
+      <header
+        className={classNames("Tablar-header", {
+          "Tablar-header--dark": isDarkMode
+        })}
+      >
+        {/* ... */}
+      </header>
+    </Background>
+  );
+}
+```
+
+### Update `Tablar.css`
 
 ```css
 .Tablar-header.Tablar-header--dark {

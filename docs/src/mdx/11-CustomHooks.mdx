@@ -38,9 +38,11 @@ const useDocumentKeyCodes = () => {
 
 Let's update Tablar and use a custom hook to handle the `window.localStorage` logic in the `Background.js` Component.
 
-### `customHooks.js`
+### New `customHooks.js`
 
 Create a new file called `customHooks.js` and add the following content...
+
+**NOTE:** You'll need to clear out the localStorage since this reads and stores JSON
 
 ```jsx
 import { useState, useEffect } from "react";
@@ -58,7 +60,7 @@ export const useLocalStorage = (key, defaultValue) => {
 };
 ```
 
-### `Background.js`
+### Update `Background.js`
 
 Update `Background.js` to include the new `useLocalStorage` custom hook and use it throughout the Component.
 

@@ -6,7 +6,7 @@ In React it is very common to pass data down the React tree and also to pass it 
 
 We are going to create a TicTacToe component and example how the state moves down and up the component tree.
 
-### `TicTacToe.js`
+### New `TicTacToe.js`
 
 ```jsx
 import React, { useState } from "react";
@@ -14,10 +14,10 @@ import classNames from "classnames";
 import { useSpring, animated } from "react-spring";
 import "./TicTacToe.scss";
 
-function Square({ value, onClick }) {
+function Square({ value, index, onClick }) {
   const props = useSpring({ opacity: value ? 1 : 0 });
   return (
-    <button className="Square" onClick={onClick}>
+    <button className="Square" onClick={() => onClick(index)}>
       <animated.div style={props}>{value}</animated.div>
     </button>
   );
@@ -49,15 +49,9 @@ function calculateWinner(squares) {
 function Board({ squares, onClick }) {
   return (
     <div className="Board">
-      {[...Array(9)].map((_, index) => {
-        return (
-          <Square
-            key={index}
-            value={squares[index]}
-            onClick={() => onClick(index)}
-          />
-        );
-      })}
+      {squares.map((square, i) => (
+        <Square key={i} index={i} value={square} onClick={onClick} />
+      ))}
     </div>
   );
 }
@@ -133,12 +127,14 @@ export default function Game() {
 }
 ```
 
-### `TicTacToe.scss`
+### New `TicTacToe.scss`
 
 In order to get SASS to work, you'll need to install `node-sass`
 
 ```shell
 npm install node-sass
+# OR
+yarn add node-sass
 ```
 
 ```jsx
@@ -269,7 +265,7 @@ npm install node-sass
 }
 ```
 
-### `Tablar.css`
+### Append `Tablar.css`
 
 ```jsx
 [data-reach-dialog-content] {
@@ -278,7 +274,15 @@ npm install node-sass
 }
 ```
 
-### `Tablar.js`
+### Update `Tablar.js`
+
+The `Tablar` component will now using the `@reach/dialog` dependency for our `Dialog` component.
+
+```shell
+npm install @reach/dialog
+# OR
+yarn add @reach/dialog
+```
 
 ```jsx
 import { Dialog } from "@reach/dialog";
@@ -294,7 +298,11 @@ export default function Tablar() {
   return (
     <Background>
       {/* ... */}
-      <Dialog isOpen={showTicTacToe} onDismiss={() => toggleTicTacToe(false)}>
+      <Dialog
+        aria-label="Tic-Tac-Toe"
+        isOpen={showTicTacToe}
+        onDismiss={() => toggleTicTacToe(false)}
+      >
         <TicTacToe />
       </Dialog>
     </Background>

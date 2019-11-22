@@ -34,32 +34,10 @@ function Counter() {
 
 Update TicTacToe.js to useReducer instead of multiple useState
 
-### `TicTacToe.js`
+### Update `TicTacToe.js`
 
 ```jsx
 import React, { useReducer } from "react";
-/* ... */
-
-function Square({ value, index, onClick }) {
-  const props = useSpring({ opacity: value ? 1 : 0 });
-  return (
-    <button className="Square" onClick={() => onClick(index)}>
-      <animated.div style={props}>{value}</animated.div>
-    </button>
-  );
-}
-
-/* ... */
-
-function Board({ squares, onClick }) {
-  return (
-    <div className="Board">
-      {squares.map((square, i) => (
-        <Square key={i} index={i} value={square} onClick={onClick} />
-      ))}
-    </div>
-  );
-}
 
 /* ... */
 
@@ -99,6 +77,138 @@ export default function Game() {
 
   /* ... */
 }
+```
+
+## Replace `SettingsContext.js`
+
+```jsx
+import React, { useMemo } from "react";
+import useDarkMode from "use-dark-mode";
+import { useReducerWithLocalStorage } from "./customHooks";
+
+const SettingsContext = React.createContext();
+const initialSettings = {
+  name: "",
+  collectionBackgroundUrl:
+    "https://source.unsplash.com/collection/3802293/1600x900",
+  cachedBackgroundUrl: ""
+};
+
+function settingsReducer(state, action) {
+  switch (action.type) {
+    case "SET_NAME": {
+      return { ...state, name: action.name };
+    }
+    case "SET_BACKGROUND_URL": {
+      return { ...state, cachedBackgroundUrl: action.backgroundUrl };
+    }
+    case "RESET_BACKGROUND_URL": {
+      return { ...state, cachedBackgroundUrl: "" };
+    }
+    default: {
+      throw new Error(`Unsupported action type: ${action.type}`);
+    }
+  }
+}
+
+function useSettings() {
+  const context = React.useContext(SettingsContext);
+  if (!context) {
+    throw new Error(`useSettings must be used within a SettingsProvider`);
+  }
+  return context;
+}
+
+function SettingsProvider(props) {
+  const { value: isDarkMode, toggle: toggleDarkMode } = useDarkMode(false);
+  const [state, dispatch] = useReducerWithLocalStorage(
+    settingsReducer,
+    "settings",
+    initialSettings
+  );
+  const value = useMemo(
+    () => ({ ...state, dispatch, isDarkMode, toggleDarkMode }),
+    [state, dispatch, isDarkMode, toggleDarkMode]
+  );
+
+  return <SettingsContext.Provider value={value} {...props} />;
+}
+
+export { SettingsProvider, useSettings };
+```
+
+## Update `Background.js`
+
+```diff
+- const UNSPLASH_COLLECTION =
+-   "https://source.unsplash.com/collection/3802293/1600x900";
+export default function Background({ children }) {
+-  const [url, setUrl] = useLocalStorage("backgroundImage", UNSPLASH_COLLECTION);
+-  const [isDarkMode] = useSettings();
++  const {
++    collectionBackgroundUrl,
++    cachedBackgroundUrl,
++    dispatch,
++    isDarkMode
++  } = useSettings()
++}
+
+  console.log({ isDarkMode });
+
+  useEffect(() => {
+    async function getUrl() {
+-      if (url === UNSPLASH_COLLECTION) {
+-        const response = await window.fetch(UNSPLASH_COLLECTION);
+-        setUrl(response.url);
++     if (!cachedBackgroundUrl) {
++        const response = await window.fetch(collectionBackgroundUrl);
++        dispatch({ type: "SET_BACKGROUND_URL", backgroundUrl: response.url });
+      }
+    }
+    getUrl();
+-  }, [setUrl, url]);
++  }, [dispatch, cachedBackgroundUrl, collectionBackgroundUrl])
+
+  useEffect(() => {
+    const handleKey = ({ key, ctrlKey, metaKey }) => {
+      if (key === "b" && (metaKey || ctrlKey)) {
+-        setUrl(UNSPLASH_COLLECTION);
++        dispatch({ type: "RESET_BACKGROUND_URL" });
+      }
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+-  }, [setUrl]);
++  }, [dispatch]);
+
+  return (
+    <>
+      <div
+        className="Background"
+        style={{
+          backgroundImage: `
+            radial-gradient(circle, transparent 40%, ${
+              isDarkMode ? "black" : "transparent"
+            } 75%),
+            linear-gradient(to right, transparent, transparent),
+-            url(${url})
++            url(${cachedBackgroundUrl})
+          `,
+          backgroundPosition: "center center",
+          backgroundSize: "cover"
+        }}
+      >
+        {children}
+      </div>
+    </>
+  );
+}
+```
+
+## Update `Tablar.js`
+
+```diff
+-import { useLocalStorage } from "./customHooks"
 ```
 
 ## Code Check Point
