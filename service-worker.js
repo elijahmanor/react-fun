@@ -13,13 +13,9 @@
 
 importScripts("./precache-manifest.8ea45cdc9d1311331368a02e7cf8ff8d.js");
 
-<<<<<<< Updated upstream
-importScripts("./precache-manifest.8ea45cdc9d1311331368a02e7cf8ff8d.js");
-=======
 importScripts(
   "./precache-manifest.8ea45cdc9d1311331368a02e7cf8ff8d.js"
 );
->>>>>>> Stashed changes
 
 self.addEventListener("message", event => {
   if (event.data && event.data.type === "SKIP_WAITING") {
