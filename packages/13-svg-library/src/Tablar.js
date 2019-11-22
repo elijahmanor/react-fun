@@ -61,7 +61,11 @@ export default function Tablar() {
           height="1rem"
         />
       </button>
-      <Dialog isOpen={showTicTacToe} onDismiss={() => toggleTicTacToe(false)}>
+      <Dialog
+        aria-label="Tic-Tac-Toe"
+        isOpen={showTicTacToe}
+        onDismiss={() => toggleTicTacToe(false)}
+      >
         <TicTacToe />
       </Dialog>
       <IconLibrary />

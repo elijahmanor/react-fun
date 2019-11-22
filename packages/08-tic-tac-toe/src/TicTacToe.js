@@ -3,10 +3,10 @@ import classNames from "classnames";
 import { useSpring, animated } from "react-spring";
 import "./TicTacToe.scss";
 
-function Square({ value, onClick }) {
+function Square({ value, index, onClick }) {
   const props = useSpring({ opacity: value ? 1 : 0 });
   return (
-    <button className="Square" onClick={onClick}>
+    <button className="Square" onClick={() => onClick(index)}>
       <animated.div style={props}>{value}</animated.div>
     </button>
   );
@@ -38,15 +38,9 @@ function calculateWinner(squares) {
 function Board({ squares, onClick }) {
   return (
     <div className="Board">
-      {[...Array(9)].map((_, index) => {
-        return (
-          <Square
-            key={index}
-            value={squares[index]}
-            onClick={() => onClick(index)}
-          />
-        );
-      })}
+      {squares.map((square, i) => (
+        <Square key={i} index={i} value={square} onClick={onClick} />
+      ))}
     </div>
   );
 }

@@ -42,7 +42,11 @@ export default function Tablar() {
           onChange={name => dispatch({ type: "SET_NAME", name })}
         />
       </header>
-      <Dialog isOpen={showTicTacToe} onDismiss={() => toggleTicTacToe(false)}>
+      <Dialog
+        aria-label="Tic-Tac-Toe"
+        isOpen={showTicTacToe}
+        onDismiss={() => toggleTicTacToe(false)}
+      >
         <TicTacToe />
       </Dialog>
     </Background>

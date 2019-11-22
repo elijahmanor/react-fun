@@ -10,7 +10,7 @@ function isInIframe() {
 }
 
 export default function Greeting({ name, onChange }) {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(!name);
   const input = useRef();
   useEffect(() => {
     if (isEditing) {
