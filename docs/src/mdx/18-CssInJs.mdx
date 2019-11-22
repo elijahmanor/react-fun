@@ -20,13 +20,17 @@ For the following Component we will need to install the following dependencies..
 
 ```shell
 npm i @emotion/core @emotion/styled
+
 # OR
+
 npm i @emotion/{core,styled}
+
 # OR
+
 yarn add @emotion/core @emotion/styled
 ```
 
-```js
+```jsx
 import styled from "@emotion/styled";
 
 const Button = styled.button`
@@ -36,8 +40,8 @@ const Button = styled.button`
   margin: 0 0.5rem 0 0;
   min-width: 5rem;
   text-decoration: none;
-  background: \${props => (props.primary ? "#0069ed" : "#ccc")};
-  color: \${props => (props.primary ? "#fff" : "#000")};
+  background: ${props => (props.primary ? "#0069ed" : "#ccc")};
+  color: ${props => (props.primary ? "#fff" : "#000")};
   font-size: 1rem;
   cursor: pointer;
   text-align: center;
@@ -67,7 +71,7 @@ export default Button;
 
 ### Update `TicTacToe.js`
 
-```jsx
+```diff
 /* ... */
 import Button from "./Button";
 /* ... */
@@ -77,9 +81,15 @@ function Announcement({ winner, onStart }) {
   return (
     <animated.div style={props} className="Announcement">
       {/* ... */}
-      <Button primary onClick={onStart}>
+
+-      <button
+-        className="Announcement-button Announcement-button--primary"
+-        onClick={onStart}
+-      >
++      <Button primary onClick={onStart}>
         Start
-      </Button>
+-      </button
++      </Button>
     </animated.div>
   );
 }

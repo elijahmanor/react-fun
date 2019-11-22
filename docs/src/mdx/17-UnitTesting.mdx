@@ -18,17 +18,21 @@ Add unit tests for the `Greeting` React component
 
 ### Install Dependencies
 
-```
+```shell
 npm install @testing-library/react @testing-library/jest-dom --save-dev
+
 # OR
+
 npm i @testing-library{react,jest-dom} -D
+
 # OR
+
 yarn add @testing-library{react,jest-dom} --dev
 ```
 
 ### Run Tests
 
-```
+```shell
 npm test
 ```
 
@@ -112,18 +116,27 @@ describe("when rendering an input", () => {
 
 To help assist with testing we will add some special data attributes to the items that we are testing. If you'd like these to be removed in production you can use the [babel-plugin-react-remove-properties](https://www.npmjs.com/package/babel-plugin-react-remove-properties).
 
-```js
+```diff
 /* ... */
-return (
-  <div className="Greeting">
-    {isEditing ? (
-      <input data-testid="greeting-text" />
-    ) : (
-      <h1 data-testid="greeting-label">{/* ... */}</h1>
-    )}
-  </div>
-);
-/* ... */
+export default function Greeting({ name, onChange }) {
+  /* ... */
+  return (
+    <div className="Greeting">
+      {isEditing ? (
+        <input
++          data-testid="greeting-text"
+          {/* ... */}
+        />
+      ) : (
+        <h1
++          data-testid="greeting-label"
+          {/* ... */}>
+          {/* ... */}
+        </h1>
+      )}
+    </div>
+  );
+}
 ```
 
 ## Code Check Point

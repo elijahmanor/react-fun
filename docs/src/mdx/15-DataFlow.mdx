@@ -12,6 +12,7 @@ We are going to create a TicTacToe component and example how the state moves dow
 import React, { useState } from "react";
 import classNames from "classnames";
 import { useSpring, animated } from "react-spring";
+
 import "./TicTacToe.scss";
 
 function Square({ value, index, onClick }) {
@@ -133,11 +134,13 @@ In order to get SASS to work, you'll need to install `node-sass`
 
 ```shell
 npm install node-sass
+
 # OR
+
 yarn add node-sass
 ```
 
-```jsx
+```scss
 .Game {
   display: inline-block;
   position: relative;
@@ -267,7 +270,7 @@ yarn add node-sass
 
 ### Append `Tablar.css`
 
-```jsx
+```css
 [data-reach-dialog-content] {
   display: flex;
   justify-content: center;
@@ -280,7 +283,9 @@ The `Tablar` component will now using the `@reach/dialog` dependency for our `Di
 
 ```shell
 npm install @reach/dialog
+
 # OR
+
 yarn add @reach/dialog
 ```
 
