@@ -25,7 +25,7 @@ const ForkTsCheckerWebpackPlugin = require("react-dev-utils/ForkTsCheckerWebpack
 const typescriptFormatter = require("react-dev-utils/typescriptFormatter");
 const postcssNormalize = require("postcss-normalize");
 const rehypePrism = require("@mapbox/rehype-prism");
-// const externalLinks = require("remark-external-links");
+const externalLinks = require("remark-external-links");
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== "false";
 // Some apps do not need the benefits of saving a web request, so not inlining the chunk
@@ -465,8 +465,8 @@ module.exports = function(webpackEnv) {
                 {
                   loader: "@mdx-js/loader",
                   options: {
-                    rehypePlugins: [rehypePrism]
-                    // remarkPlugins: [externalLinks]
+                    rehypePlugins: [rehypePrism],
+                    remarkPlugins: [externalLinks]
                   }
                 }
               ]
