@@ -17,8 +17,8 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 // import { Router, Link, navigate } from "@reach/router";
 import "prism-themes/themes/prism-darcula.css";
 
-const version = "v2.5.1";
-const date = "Nov 22, 2019 7:12 AM";
+const version = "v2.5.2";
+const date = "May 15, 2022 5:49 PM";
 const drawerWidth = 240;
 // const basepath = window.location.pathname;
 
@@ -26,141 +26,141 @@ const NAVIGATION = [
   {
     text: "Home",
     Component: require("./mdx/01-Home.mdx").default,
-    path: "home"
+    path: "home",
   },
   {
     text: "What is React?",
     Component: require("./mdx/02-WhatIsReact.mdx").default,
-    path: "what-is-react"
+    path: "what-is-react",
   },
   {
     text: "React Sans Build",
     Component: require("./mdx/03-ReactSansBuild.mdx").default,
-    path: "react-sans-build"
+    path: "react-sans-build",
   },
   { text: "JSX", Component: require("./mdx/04-JSX.mdx").default, path: "jsx" },
   {
     text: "Create React App",
     Component: require("./mdx/05-CreateReactApp.mdx").default,
-    path: "create-react-app"
+    path: "create-react-app",
   },
   {
     text: "Components",
     Component: require("./mdx/06-Components.mdx").default,
-    path: "components"
+    path: "components",
   },
   {
     text: "What are Hooks?",
     Component: require("./mdx/07-WhatAreHooks.mdx").default,
-    path: "what-are-hooks"
+    path: "what-are-hooks",
   },
   {
     text: "useState",
     Component: require("./mdx/08-UseState.mdx").default,
-    path: "usestate"
+    path: "usestate",
   },
   {
     text: "useEffect",
     Component: require("./mdx/09-UseEffect.mdx").default,
-    path: "useeffect"
+    path: "useeffect",
   },
   {
     text: "Rules of Hooks",
     Component: require("./mdx/10-RulesOfHooks.mdx").default,
-    path: "rules-of-hooks"
+    path: "rules-of-hooks",
   },
   {
     text: "Custom Hooks",
     Component: require("./mdx/11-CustomHooks.mdx").default,
-    path: "custom-hooks"
+    path: "custom-hooks",
   },
   {
     text: "Community Hooks",
     Component: require("./mdx/12-CommunityHooks.mdx").default,
-    path: "community-hooks"
+    path: "community-hooks",
   },
   {
     text: "Forms",
     Component: require("./mdx/13-Forms.mdx").default,
-    path: "forms"
+    path: "forms",
   },
   {
     text: "Context",
     Component: require("./mdx/14-Context.mdx").default,
-    path: "context"
+    path: "context",
   },
   {
     text: "Data Flow",
     Component: require("./mdx/15-DataFlow.mdx").default,
-    path: "data-flow"
+    path: "data-flow",
   },
   {
     text: "useReducer",
     Component: require("./mdx/16-UseReducer.mdx").default,
-    path: "usereducer"
+    path: "usereducer",
   },
   {
     text: "Unit Testing",
     Component: require("./mdx/17-UnitTesting.mdx").default,
-    path: "unit-testing"
+    path: "unit-testing",
   },
   {
     text: "CSS in JS",
     Component: require("./mdx/18-CssInJs.mdx").default,
-    path: "css-in-js"
+    path: "css-in-js",
   },
   {
     text: "Performance",
     Component: require("./mdx/19-Performance.mdx").default,
-    path: "performance"
+    path: "performance",
   },
   {
     text: "SVG Library",
     Component: require("./mdx/20-SvgLibrary.mdx").default,
-    path: "svg-library"
+    path: "svg-library",
   },
   {
     text: "Component Library",
     Component: require("./mdx/21-ComponentLibrary.mdx").default,
-    path: "component-library"
+    path: "component-library",
   },
   {
     text: "Misc",
     Component: require("./mdx/99-Misc.mdx").default,
-    path: "misc"
-  }
+    path: "misc",
+  },
 ];
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: "flex"
+    display: "flex",
   },
   drawer: {
     [theme.breakpoints.up("md")]: {
       width: drawerWidth,
-      flexShrink: 0
-    }
+      flexShrink: 0,
+    },
   },
   appBar: {
     marginLeft: drawerWidth,
     [theme.breakpoints.up("md")]: {
-      width: `calc(100% - ${drawerWidth}px)`
-    }
+      width: `calc(100% - ${drawerWidth}px)`,
+    },
   },
   menuButton: {
     marginRight: theme.spacing(2),
     [theme.breakpoints.up("md")]: {
-      display: "none"
-    }
+      display: "none",
+    },
   },
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3)
-  }
+    padding: theme.spacing(3),
+  },
 }));
 
 function ResponsiveDrawer(props) {
@@ -188,7 +188,7 @@ function ResponsiveDrawer(props) {
         style={{
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         <span
@@ -202,7 +202,7 @@ function ResponsiveDrawer(props) {
             style={{
               cursor: "pointer",
               fontSize: "2rem",
-              border: "transparent"
+              border: "transparent",
             }}
             onClick={handleNext}
           >
@@ -283,10 +283,10 @@ function ResponsiveDrawer(props) {
             open={mobileOpen}
             onClose={handleDrawerToggle}
             classes={{
-              paper: classes.drawerPaper
+              paper: classes.drawerPaper,
             }}
             ModalProps={{
-              keepMounted: true // Better open performance on mobile.
+              keepMounted: true, // Better open performance on mobile.
             }}
           >
             {drawer}
@@ -295,7 +295,7 @@ function ResponsiveDrawer(props) {
         <Hidden smDown implementation="css">
           <Drawer
             classes={{
-              paper: classes.drawerPaper
+              paper: classes.drawerPaper,
             }}
             variant="permanent"
             open
@@ -323,7 +323,7 @@ function ResponsiveDrawer(props) {
 }
 
 ResponsiveDrawer.propTypes = {
-  container: PropTypes.object
+  container: PropTypes.object,
 };
 
 export default ResponsiveDrawer;
