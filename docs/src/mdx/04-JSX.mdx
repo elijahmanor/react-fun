@@ -1,6 +1,6 @@
 # JSX
 
-Wouldn't it be nice if you didn't have to write and nest out all of that JavaScript like the following code snippet? Well, that's were JSX comes into play.
+Wouldn't it be nice if you didn't have to write and nest out all of that JavaScript like the following code snippet? Well, that's where JSX comes into play.
 
 ```jsx
 function Ball() {
@@ -8,7 +8,7 @@ function Ball() {
     "div",
     {
       title: name,
-      className: "Ball"
+      className: "Ball",
     },
     React.createElement("span", null, "1")
   );
@@ -16,7 +16,7 @@ function Ball() {
 ReactDOM.render(React.createElement(Ball), document.getElementById("app"));
 ```
 
-JSX provides a nice succient way to represent the above structure. It's XML based and should look very familiar to what you might expect from HTML.
+JSX provides a nice succient way to represent the above structure. It's XML-based and should look very familiar to what you might expect from HTML.
 
 ```jsx
 function Ball() {
@@ -29,12 +29,12 @@ function Ball() {
 ReactDOM.render(<Ball />, document.getElementById("app"));
 ```
 
-Doesn't the look much better? Well, that was initially debated when React first came out...
+Doesn't that look much better? Well, that was initially debated when React first came out...
 
 ![](./images/iamdeveloper-jsx.png)
 
 Normally you would need a build step to convert JSX to the desired JavaScript output,
-but for testing purposes you can add the standalone `babel` script and add a `type="text/babel"` attribute to your `<script>` tag.
+but for testing purposes, you can add the standalone `babel` script and add a `type="text/babel"` attribute to your `<script>` tag.
 
 ```html
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -49,7 +49,7 @@ Now that things are a bit simplier, let's spice this up a little and have some f
 
 ## You must import React
 
-Since JSX is converted to React.createElement calls, you must have React in scope. So, get in the habbit of importing or requiring React in your files.
+Since JSX is converted to `React.createElement` calls, you must have React in scope. So, get in the habbit of importing or requiring React in your files.
 
 ```javascript
 import React from "react";
@@ -57,8 +57,8 @@ import React from "react";
 
 ## When is JSX Used?
 
-You typicaly see JSX used in the return of a function component or in the render method of a class component.
-The following 4 components are equivalent and you could see something like that in the wild.
+You typically see JSX used in the return of a function component or the render method of a class component.
+The following 4 components are functionally equivalent and you may see these variations in the wild.
 
 ```jsx
 function Component1() {
@@ -97,7 +97,7 @@ function MyComponent(props) {
 
 ## Expression Curly Braces
 
-You can really put any JavaScript expression inside of JSX
+You can put any JavaScript expression inside of JSX.
 
 ```jsx
 function MyComponent(props) {
@@ -117,7 +117,7 @@ function MyComponent(props) {
 
 ## Destructuring from Props
 
-It's pretty common to mix argument destructuring along with the `props` argument passed into a Function Component
+It's pretty common to mix argument destructuring along with the `props` argument passed into a Function Component.
 
 ```jsx
 function MyComponent1(props) {

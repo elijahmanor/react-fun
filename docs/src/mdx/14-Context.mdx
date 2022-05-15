@@ -55,7 +55,7 @@ const ThemeContext = createContext();
 const localeMap = {
   "en-US": { locale: "en-US", flag: "US", content: "Hello, World!" },
   "fr-FR": { locale: "fr-FR", flag: "FR", content: "Bonjour le monde!" },
-  "es-ES": { locale: "es-ES", flag: "ES", content: "¡Hola Mundo!" }
+  "es-ES": { locale: "es-ES", flag: "ES", content: "¡Hola Mundo!" },
 };
 
 function LocaleFlag() {
@@ -111,7 +111,7 @@ const ThemeContext = React.createContext();
 const localeMap = {
   "en-US": { locale: "en-US", flag: "US", content: "Hello, World!" },
   "fr-FR": { locale: "fr-FR", flag: "FR", content: "Bonjour le monde!" },
-  "es-ES": { locale: "es-ES", flag: "ES", content: "¡Hola Mundo!" }
+  "es-ES": { locale: "es-ES", flag: "ES", content: "¡Hola Mundo!" },
 };
 
 const LocaleSwitcher = memo(props => {
@@ -123,7 +123,7 @@ const LocaleSwitcher = memo(props => {
     <ThemeContext.Provider
       value={{
         state: locale,
-        updateLocale: e => setLocale(localeMap[e.target.value])
+        updateLocale: e => setLocale(localeMap[e.target.value]),
       }}
     >
       {props.children}
@@ -183,7 +183,7 @@ const LocaleSwitcher = memo(props => {
   const value = useMemo(() => {
     return {
       state: locale,
-      updateLocale: e => setLocale(localeMap[e.target.value])
+      updateLocale: e => setLocale(localeMap[e.target.value]),
     };
   }, [locale]);
   return (
@@ -201,11 +201,11 @@ const LocaleSwitcher = memo(props => {
 
 ## Lab
 
-Add a Settings Context to the Tablar program.
+Add a `SettingsContext` to the tablar program.
 
 ### New `SettingsContext.js`
 
-We will be using the `use-dark-mode` dependency to detect Operating Sytem level dark mode support.
+We will be using the `use-dark-mode` dependency to check the dark mode setting from the operating system.
 
 ```shell
 npm i use-dark-mode
@@ -231,10 +231,10 @@ function useSettings() {
 
 function SettingsProvider(props) {
   const { value: isDarkMode, toggle: toggleDarkMode } = useDarkMode(false);
-  const value = React.useMemo(() => [isDarkMode, toggleDarkMode], [
-    isDarkMode,
-    toggleDarkMode
-  ]);
+  const value = React.useMemo(
+    () => [isDarkMode, toggleDarkMode],
+    [isDarkMode, toggleDarkMode]
+  );
   return <SettingsContext.Provider value={value} {...props} />;
 }
 
@@ -281,7 +281,7 @@ export default function Background({ children }) {
             url(${url})
           `,
           backgroundPosition: "center center",
-          backgroundSize: "cover"
+          backgroundSize: "cover",
         }}
       >
         {children}
@@ -293,7 +293,7 @@ export default function Background({ children }) {
 
 ### Update `Tablar.js`
 
-We will use the `react-hotekeys-hook` 3rd-Party dependency for this Component.
+We will use the `react-hotkeys-hook` 3rd-Party dependency for this Component.
 
 ```shell
 npm i react-hotkeys-hook
@@ -359,7 +359,7 @@ export default function Tablar() {
     <Background>
       <header
         className={classNames("Tablar-header", {
-          "Tablar-header--dark": isDarkMode
+          "Tablar-header--dark": isDarkMode,
         })}
       >
         {/* ... */}
@@ -371,7 +371,7 @@ export default function Tablar() {
 
 ## Code Check Point
 
-At this point in the Workshop you should be somewhere near the following checkpoint
+At this point in the workshop, you should be somewhere near the following checkpoint
 
 - [GitHub](https://github.com/elijahmanor/react-fun/tree/master/packages/07-context)
 - [CodeSandbox](https://codesandbox.io/s/github/elijahmanor/react-fun/tree/master/packages/07-context)

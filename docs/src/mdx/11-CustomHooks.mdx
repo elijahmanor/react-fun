@@ -1,6 +1,6 @@
 # Custom Hooks
 
-Let's update the KeyCode example we worked with before and pull out the state logic that handled listening to keydown and updating state.
+Let's update the `KeyCode` example we worked with before and pull out the state logic that handled listening to the `keydown` event and updating the state.
 
 ```jsx
 const useDocumentKeyCode = () => {
@@ -19,7 +19,7 @@ function KeyCode() {
 }
 ```
 
-In this case we could briefly tweak the custom hook so that it can serve a bigger service than just `code`.
+In this case, we could briefly tweak the custom hook so that it can serve a bigger service than just `code`.
 
 ```jsx
 const useDocumentKeyCodes = () => {
@@ -108,7 +108,7 @@ export default function Background({ children }) {
 
 ## Code Check Point
 
-At this point in the Workshop you should be somewhere near the following checkpoint
+At this point in the workshop, you should be somewhere near the following checkpoint
 
 - [GitHub](https://github.com/elijahmanor/react-fun/tree/master/packages/04-custom-hook)
 - [CodeSandbox](https://codesandbox.io/s/github/elijahmanor/react-fun/tree/master/packages/04-custom-hook)

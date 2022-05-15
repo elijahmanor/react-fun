@@ -27,13 +27,13 @@ function Counter() {
 
 ## Doesn't Work Exactly Like `this.setState()`
 
-If you have experience with Class Components, then you may be familiar that `this.setState()` merges any changes passed to it with it's current value. However, the `useState` updater does not do that.
+If you have experience with Class Components, then you may be familiar that `this.setState()` merges any changes passed to it with its current value. However, the `useState` updater does not do that.
 
 ```jsx
 function Counter() {
   const [counts, setCounts] = React.useState({
     count1: 0,
-    count2: 0
+    count2: 0,
   });
 
   return (
@@ -58,7 +58,7 @@ const [state, setState] = React.useReducer(
 );
 ```
 
-## How Does this Even Work?
+## How Does This Even Work?
 
 Let's create our own `useState` function and see what is going on.
 
@@ -89,7 +89,7 @@ function reRender() {
 reRender();
 ```
 
-### Support Multiple States
+### How to Support Multiple States
 
 ```js
 const hooks = [];

@@ -21,13 +21,13 @@
 - Wired
 - Yahoo
 
-Add your own entry to [Facebook's Sites Using React Wiki](https://github.com/facebook/react/wiki/Sites-Using-React)
+Add your entry to [Facebook's Sites Using React Wiki](https://github.com/facebook/react/wiki/Sites-Using-React)
 
 ## Not a New Library
 
 ![](./images/days-since.png)
 
-Unlike some libraries, React has been around for many years and despite it's longevity it's API has hasn't changed too much, but when it has changed the React team has provided codemods to update existing code.
+Unlike some libraries, React has been around for many years and despite its longevity, the API hasn't changed too much. When the API did change, the React team provided codemods to update existing code.
 
 ## So, it's like Angular or Ember?
 
@@ -57,15 +57,15 @@ Nope
 ### Imperative: How
 
 ```js
-$("form").on("submit", function(e) {
+$("form").on("submit", function (e) {
   e.preventDefault();
   $.ajax({
     url: "/customers",
     type: "POST",
     data: $(this).serialize(),
-    success: function(data) {
+    success: function (data) {
       $(".status").append("<h3>" + data + "</h3>");
-    }
+    },
   });
 });
 ```
@@ -99,7 +99,7 @@ class NoteBox extends Component {
 
 ## React Uses a One-Way Data Flow
 
-> ...you can set the directionality of it to be 2-Way Data Binding. That actually seems to be a good idea until you have a large scale application and then it turns out you have no idea whats going on... and turns out to be an anti-pattern for large apps. --[Misko Hevery](https://www.youtube.com/watch?v=uD6Okha_Yj0#t=1785)
+> ...you can set the directionality of it to be 2-Way Data Binding. That actually seems to be a good idea until you have a large-scale application and then it turns out you have no idea what's going on... and turns out to be an anti-pattern for large apps. --[Misko Hevery](https://www.youtube.com/watch?v=uD6Okha_Yj0#t=1785)
 
 ![](./images/2-way-binding.png)
 

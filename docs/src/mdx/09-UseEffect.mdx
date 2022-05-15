@@ -10,7 +10,7 @@ If you have experience with Class Components, you may have done some of these in
 
 ## What Does it Look Like?
 
-In it's simpliest form, it takes a function as a callback that will be excuted after React has updated the DOM.
+In its simplest form, `useEffect` takes a function as a callback that will be executed after React has updated the DOM.
 
 ```jsx
 import React, { useEffect } from "react";
@@ -35,7 +35,7 @@ function Counter() {
 }
 ```
 
-If you don't provide a 2nd parameter to useEffect it will execute after every render, not just once. You can optionally provide a second parameter to determine how frequently the effect is executed.
+If you don't provide the 2nd parameter to `useEffect` it will execute after every render, not just once. You can optionally provide a second parameter to determine how frequently the effect is executed.
 
 ```jsx
 import React, { useEffect } from "react";
@@ -68,7 +68,7 @@ class KeyCode extends React.Component {
 }
 ```
 
-## Convert KeyCode to Function Component with useEffect Hook
+## Convert KeyCode to Function Component with `useEffect` Hook
 
 ```jsx
 function KeyCode() {
@@ -121,7 +121,7 @@ export default function Tablar() {
 
 #### Replace `Background.js`
 
-Next we will pull a nice background image from unsplash and save the URL in localStorage. We'll also make a keyboard shortcut so that you can refresh to a new background.
+Next, we will pull a nice background image from unsplash and save the URL in localStorage. We'll also make a keyboard shortcut so that you can refresh to a new background.
 
 ```jsx
 import React, { useState, useEffect } from "react";
@@ -163,7 +163,7 @@ export default function Background({ children }) {
         style={{
           backgroundImage: `url(${url})`,
           backgroundPosition: "center center",
-          backgroundSize: "cover"
+          backgroundSize: "cover",
         }}
       >
         {children}
@@ -175,13 +175,13 @@ export default function Background({ children }) {
 
 ## Gotchas
 
-If you get the dependencies array wrong you could run into the case where TONS of effects are executed. If you happen to have a AJAX request in one of those effectts, then that could be VERY bad. Kent C. Dodds has made a nice development utility to try and identify those issues before they hit production.
+If you get the dependencies array wrong you could run into the case where TONS of effects are executed. If you happen to have an AJAX request in one of those effects, then that could be VERY bad. Kent C. Dodds has made a nice development utility to try and identify those issues before they hit production.
 
 - https://github.com/kentcdodds/stop-runaway-react-effects
 
 ## Code Check Point
 
-At this point in the Workshop you should be somewhere near the following checkpoint
+At this point in the workshop, you should be somewhere near the following checkpoint
 
 - [GitHub](https://github.com/elijahmanor/react-fun/tree/master/packages/03-intro-state-effects)
 - [CodeSandbox](https://codesandbox.io/s/github/elijahmanor/react-fun/tree/master/packages/03-intro-state-effects)

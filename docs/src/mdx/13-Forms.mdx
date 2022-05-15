@@ -13,7 +13,7 @@ You can use the following CodeSandbox as a starting point for the following two 
 
 ## Form with a Bug
 
-There are Controlled form, uncontrolled forms, and something inbetween that is very annoying (partially controlled).
+There are controlled forms, uncontrolled forms, and something in-between that is very annoying (partially controlled forms).
 
 ```jsx
 import React, { useState, useEffect, Fragment } from "react";
@@ -49,7 +49,7 @@ export default function App() {
 
 ## Controlled Forms
 
-A controlled form element is one where React takes control of assigning its value and listening to its changes. In this way, React can know the form element's state at any moment. You typically want this type of behavior so that you can do validation and other type of logic.
+A controlled form element is one where React takes control of assigning its value and listening to its changes. In this way, React can know the form element's state at any moment. You typically want this type of behavior so that you can do validation and other types of logic.
 
 ```jsx
 import React, { useState } from "react";
@@ -96,7 +96,7 @@ export default function App({ meme }) {
 
 ## Uncontrolled Forms
 
-However, there are some times (although rarely) where you may want to work outside of React and you only want to know the state at a certain point in time. The following example shows how to do that.
+However, there are some times (although rarely) when you may want to work outside of React and you only want to know the state at a certain point in time. The following example shows how to do that.
 
 This code snippet introduces a new concept called a `ref` that enables you to grab a handle at a DOM element.
 
@@ -187,7 +187,8 @@ export default function Greeting({ name, onChange }) {
         />
       ) : (
         <h1 onDoubleClick={() => setIsEditing(true)}>
-          {greetingTime(new Date())}{name && `, ${name}`}!
+          {greetingTime(new Date())}
+          {name && `, ${name}`}!
         </h1>
       )}
     </div>
@@ -249,7 +250,7 @@ export default function Tablar() {
 
 ## Code Check Point
 
-At this point in the Workshop you should be somewhere near the following checkpoint
+At this point in the workshop, you should be somewhere near the following checkpoint
 
 - [GitHub](https://github.com/elijahmanor/react-fun/tree/master/packages/06-forms)
 - [CodeSandbox](https://codesandbox.io/s/github/elijahmanor/react-fun/tree/master/packages/06-forms)

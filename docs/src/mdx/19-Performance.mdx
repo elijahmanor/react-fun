@@ -1,6 +1,6 @@
 # Performance
 
-The topic of performance often comes up when React is taught and used. Out-of-the-box React is actually pretty fast. Most of the time you shouldn't need to really think about speed until you find that it's getting slow. At that point, you can assess the performance with the React DevTools and identify places to tweak.
+The topic of performance often comes up when React is taught and used. Out-of-the-box React is pretty fast. Most of the time you shouldn't need to think about speed until you find that it's getting slow. At that point, you can assess the performance with the React DevTools and identify places to tweak.
 
 If you have determined a section of your App that is rendering too much, you can usually use one or more of the following APIs to help address the issue.
 
@@ -12,9 +12,9 @@ If you have determined a section of your App that is rendering too much, you can
 
 ### Update `TicTacToe.js`
 
-NOTE: The following exercise is overkill and I'm not concerned about the performance of the TicTacToe component, but I do want to show the technqiues that can could help improve performance.
+NOTE: The following exercise is overkill and I'm not concerned about the performance of the TicTacToe component, but I do want to show the techniques that can help improve performance.
 
-If we add a `console.log` in the Square component, you'll notice in the console that all 9 squares are re-renedered even though 8 of them havne't changed.
+If we add a `console.log` in the Square component, you'll notice in the console that all 9 squares are re-rendered even though 8 of them haven't changed.
 
 ```jsx
 function Square({ value, index, onClick }) {
@@ -25,7 +25,7 @@ function Square({ value, index, onClick }) {
 
 ### Update `TicTacToe.js`
 
-Our first attempt to reduce the re-rendering of the Square component is going to be using the `React.memo` Higher Order Compnent (HOC).
+Our first attempt to reduce the re-rendering of the Square component is going to be using the `React.memo` Higher-Order Component (HOC).
 
 ```jsx
 import React, { memo, useReducer } from "react";
@@ -38,13 +38,13 @@ const Square = memo(({ value, index, onClick }) => {
 });
 ```
 
-Well, that didn't work did it? Why is that? It turns out that we are passing a new onClick function reference each time so `memo` thinks it should actually render it.
+Well, that didn't work, did it? Why is that? It turns out that we are passing a new onClick function reference each time so `memo` thinks it should render it.
 
 ### Update `TicTacToe.js`
 
 #### Fix #1
 
-`React.memo` has a 2nd argument that allows you to pass a `areEqual` function to give React a bit more information about when it should rerender.
+`React.memo` has a 2nd argument that allows you to pass an `areEqual` function to give React a bit more information about when it should rerender.
 
 ```jsx
 import React, { memo, useCallback, useReducer } from "react";
@@ -69,7 +69,7 @@ const Square = memo(
 
 #### Fix #2
 
-Another way to fix this is to continue and use the 1 argument of `memo`, but we need to address the fact that onClick keeps getting difference referneces. To do this, we can use the `useCallback` hook.
+Another way to fix this is to continue and use the 1 argument of `memo`, but we need to address the fact that onClick keeps getting different references. To do this, we can use the `useCallback` hook.
 
 ```jsx
 import React, { memo, useCallback, useReducer } from "react";
@@ -90,12 +90,14 @@ export default function Game() {
   /* ... */
 
   /* Option 2 - memo with useCallback */
-  const handleClick = useCallback(index => dispatch({ type: "MOVE", index }), [
-    dispatch
-  ]);
-  const handleStart = useCallback(() => dispatch({ type: "START" }), [
-    dispatch
-  ]);
+  const handleClick = useCallback(
+    index => dispatch({ type: "MOVE", index }),
+    [dispatch]
+  );
+  const handleStart = useCallback(
+    () => dispatch({ type: "START" }),
+    [dispatch]
+  );
 
   /* ... */
 }
@@ -103,7 +105,7 @@ export default function Game() {
 
 ## Code Check Point
 
-At this point in the Workshop you should be somewhere near the following checkpoint
+At this point in the workshop, you should be somewhere near the following checkpoint
 
 - [GitHub](https://github.com/elijahmanor/react-fun/tree/master/packages/12-performance)
 - [CodeSandbox](https://codesandbox.io/s/github/elijahmanor/react-fun/tree/master/packages/12-performance)

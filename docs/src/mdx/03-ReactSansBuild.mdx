@@ -2,7 +2,7 @@
 
 ## First Hello, World! App
 
-For our first interactive lab we will be using [Glitch](https://glitch.com/). It's a quick and easy way to play around with web technologies and build from others. Start a new `hello-webpage` project
+For our first interactive lab, we will be using [Glitch](https://glitch.com/). It's a quick and easy way to play around with web technologies and build from others. Start a new `hello-webpage` project
 
 Open the `index.html` file and inside your `<head>` element add the main `react` and `react-dom` scripts from [unpkg.com](https://unpkg.com/), a CDN that pulls from [npm](https://www.npmjs.com/) built by [Michael Jackson](https://twitter.com/mjackson). If your curious about unpkg, then you can check out [runpkg.com](https://runpkg.com/) built by [Formidable](https://formidable.com/blog/2019/runpkg/). Make sure these scripts are before the existing `<script src="/script.js" defer></script>` element.
 
@@ -79,7 +79,7 @@ ReactDOM.render(
 );
 ```
 
-The 2nd parameter are props passed into the element. Note the use of `className` instead of `class` (reserved word).
+The 2nd parameter represents props that are passed into the element. Note the use of `className` instead of `class` which is a reserved word.
 
 ```javascript
 const name = "Elijah";
@@ -88,7 +88,7 @@ ReactDOM.render(
     "div",
     {
       title: name,
-      className: "Ball"
+      className: "Ball",
     },
     "1"
   ),
@@ -117,7 +117,7 @@ ReactDOM.render(
     "div",
     {
       title: name,
-      className: "Ball"
+      className: "Ball",
     },
     React.createElement("span", null, "1")
   ),
@@ -131,7 +131,7 @@ function Ball() {
     "div",
     {
       title: name,
-      className: "Ball"
+      className: "Ball",
     },
     React.createElement("span", null, "1")
   );

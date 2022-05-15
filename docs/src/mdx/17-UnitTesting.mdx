@@ -2,7 +2,7 @@
 
 <!-- https://css-tricks.com/getting-started-with-react-testing-library/ -->
 
-There are lots of Test Runners and utiltiy libraries out there, but there are a few that appear to be most popular these days.
+There are lots of Test Runners and utility libraries out there, but there are a few that appear to be most popular these days.
 
 - [Jest Testing Framework](https://jestjs.io/) created by [Facebook](https://github.com/facebook/jest)
 - [`react-testing-library`](https://github.com/testing-library/react-testing-library) created by [Kent C. Dodds](https://mobile.twitter.com/kentcdodds)
@@ -44,7 +44,7 @@ import {
   render,
   fireEvent,
   cleanup,
-  waitForElement
+  waitForElement,
 } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import Greeting from "./Greeting";
@@ -56,7 +56,7 @@ jest.mock("greeting-time", () => jest.fn(() => "Howdy"));
 describe.each([
   ["empty", ""],
   ["null", null],
-  ["undefined", undefined]
+  ["undefined", undefined],
 ])("when %s is provided for name", (_, value) => {
   test(`should show input`, () => {
     const { getByTestId } = render(<Greeting name="" />);
@@ -141,7 +141,7 @@ export default function Greeting({ name, onChange }) {
 
 ## Code Check Point
 
-At this point in the Workshop you should be somewhere near the following checkpoint
+At this point in the workshop, you should be somewhere near the following checkpoint
 
 - [GitHub](https://github.com/elijahmanor/react-fun/tree/master/packages/10-testing)
 - [CodeSandbox](https://codesandbox.io/s/github/elijahmanor/react-fun/tree/master/packages/10-testing)

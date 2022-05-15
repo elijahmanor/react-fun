@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-Two great ways to get started when playing around with React is either `create-react-app` or [CodeSandbox](https://codesandbox.io/) if you want to tinker with something online and possibly share it with someone.
+Two great ways to get started when playing around with React are either `create-react-app` or [CodeSandbox](https://codesandbox.io/) if you want to tinker with something online and possibly share it with someone.
 
 ## Lab
 
@@ -10,7 +10,7 @@ Let's take some of the concepts we just learned and start a new project and turn
 
 ### Create a new React Application
 
-As long as you have `npm` version 5.2 or above, you should have a tool called `npx` already installed. It's a handy way to interact with `npm` without having to globally install modules or simplify interactiving with local modules from the command-line. If you are curious I have a [free course](https://egghead.io/courses/execute-npm-package-binaries-with-the-npx-package-runner) all about `npx` on [Egghead.io](https://egghead.io) that you can watch.
+As long as you have `npm` version 5.2 or above, you should have a tool called `npx` already installed. It's a handy way to interact with `npm` without having to globally install modules or simplify interacting with local modules from the command line. If you are curious I have a [free course](https://egghead.io/courses/execute-npm-package-binaries-with-the-npx-package-runner) all about `npx` on [Egghead.io](https://egghead.io) that you can watch.
 
 ```shell
 npm i create-react-app -g
@@ -86,7 +86,11 @@ export default App;
   animation: orbit 1s infinite linear;
 }
 
-@keyframes orbit { to { stroke-dashoffset: 50px; } }
+@keyframes orbit {
+  to {
+    stroke-dashoffset: 50px;
+  }
+}
 
 @keyframes App-logo-spin {
   from {
@@ -138,7 +142,7 @@ function Ball() {
         top: `${getRandom(0, 100)}%`,
         left: `${getRandom(0, 100)}%`,
         backgroundColor: color,
-        zIndex: -1
+        zIndex: -1,
       }}
     />
   );
@@ -167,7 +171,7 @@ export default function Tablar() {
   const dateTime = new Date();
   const time = dateTime.toLocaleTimeString("en-US", {
     hour: "numeric",
-    minute: "numeric"
+    minute: "numeric",
   });
   const [hourMinute, amPm] = time.split(" ");
 
@@ -286,7 +290,7 @@ This extension should now work in Chrome and Edge. You can find instructions on 
 
 ## Code Check Point
 
-At this point in the Workshop you should be somewhere near the following checkpoint
+At this point in the workshop, you should be somewhere near the following checkpoint
 
 - [GitHub](https://github.com/elijahmanor/react-fun/tree/master/packages/02-new-tab-extension)
 - [CodeSandbox](https://codesandbox.io/s/github/elijahmanor/react-fun/tree/master/packages/02-new-tab-extension)

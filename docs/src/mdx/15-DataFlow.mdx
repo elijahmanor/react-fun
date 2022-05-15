@@ -1,10 +1,10 @@
 # Data Flow
 
-In React it is very common to pass data down the React tree and also to pass it back up. In some cases we avoid "Prop Drilling" with Context or other techniques. Providing callback function are also a very common way to communicate with a parent that something has changed.
+In React it is very common to pass data down the React tree and also to pass it back up. In some cases, we avoid "Prop Drilling" with Context or other techniques. Providing callback function are also a very common way to communicate with a parent that something has changed.
 
 ## Lab
 
-We are going to create a TicTacToe component and example how the state moves down and up the component tree.
+We are going to create a `TicTacToe` component and examine how the state moves down and up the component tree.
 
 ### New `TicTacToe.js`
 
@@ -43,7 +43,7 @@ function calculateWinner(squares) {
     [1, 4, 7],
     [2, 5, 8],
     [0, 4, 8],
-    [2, 4, 6]
+    [2, 4, 6],
   ];
   let winner = lines.reduce((memo, [a, b, c]) => {
     if (squares[a] && squares[a] === squares[b] && squares[b] === squares[c]) {
@@ -73,7 +73,7 @@ function Announcement({ winner, onStart }) {
       await next({ opacity: 1 });
       await next({ opacity: 1, transform: "scale(1.1)" });
     },
-    from: { opacity: 0, transform: "scale(1)" }
+    from: { opacity: 0, transform: "scale(1)" },
   });
   return (
     <animated.div style={props} className="Announcement">
@@ -289,7 +289,7 @@ yarn add node-sass
 
 ### Update `Tablar.js`
 
-The `Tablar` component will now using the `@reach/dialog` dependency for our `Dialog` component.
+The `Tablar` component will now use the `@reach/dialog` dependency for our `Dialog` component.
 
 ```shell
 npm install @reach/dialog
@@ -327,7 +327,7 @@ export default function Tablar() {
 
 ## Code Check Point
 
-At this point in the Workshop you should be somewhere near the following checkpoint
+At this point in the workshop, you should be somewhere near the following checkpoint
 
 - [GitHub](https://github.com/elijahmanor/react-fun/tree/master/packages/08-tic-tac-toe)
 - [CodeSandbox](https://codesandbox.io/s/github/elijahmanor/react-fun/tree/master/packages/08-tic-tac-toe)
