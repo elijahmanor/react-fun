@@ -26,6 +26,10 @@ const dialogs = {
   }
 };
 
+chrome.bookmarks.getTree((tree) => { // eslint-disable-line
+  console.log(tree);
+});
+
 export default function Tablar() {
   const [dateTime, setDateTime] = useState(new Date());
   const { name, isDarkMode, toggleDarkMode, dispatch } = useSettings();
