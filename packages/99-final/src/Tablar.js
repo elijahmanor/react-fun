@@ -10,6 +10,16 @@ import Rss from "./Rss";
 import { IconLibrary, Icon } from "./Icon";
 import "@reach/dialog/styles.css";
 import "./Tablar.css";
+import {
+  Menu,
+  MenuList,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  MenuPopover,
+  MenuLink,
+} from "@reach/menu-button";
+import "@reach/menu-button/styles.css";
 
 const dialogs = {
   ticTacToe: {
@@ -26,11 +36,8 @@ const dialogs = {
   }
 };
 
-chrome.bookmarks.getTree((tree) => { // eslint-disable-line
-  console.log(tree);
-});
-
 export default function Tablar() {
+  const [bookmarks, setBookmarks] = useState([]);
   const [dateTime, setDateTime] = useState(new Date());
   const { name, isDarkMode, toggleDarkMode, dispatch } = useSettings();
   const [currentDialog, setCurrentDialog] = useState(null);
@@ -47,6 +54,12 @@ export default function Tablar() {
     }, 60000);
   }, []);
 
+  useEffect(() => {
+	chrome.bookmarks.getTree((tree) => { // eslint-disable-line
+	  setBookmarks(tree[0].children[0].children.slice(0, 10));
+	});
+  }, []);
+
   useHotkeys("ctrl+d", () => toggleDarkMode());
   useHotkeys("ctrl+t", () => setCurrentDialog("ticTacToe"));
 
@@ -61,7 +74,19 @@ export default function Tablar() {
       <button className="tl" onClick={() => setCurrentDialog("timer")}>
         <Icon type="timer" title="Timer" width="1rem" height="1rem" />
       </button>
-
+		<Menu>
+		  <MenuButton
+			className="tm"
+			style={{ fontSize: "1rem" }}
+		  >
+			Bookmarks <span aria-hidden>▾</span>
+		  </MenuButton>
+		  <MenuList>
+			{ bookmarks.map(bookmark => <MenuItem onSelect={() => window.location.assign(bookmark.url)}>
+				{ bookmark.title }
+			</MenuItem>) }
+		  </MenuList>
+		</Menu>
       <button className="tr" onClick={() => setCurrentDialog("ticTacToe")}>
         <Icon type="ticTacToe" title="Tic Tac Toe" width="1rem" height="1rem" />
       </button>

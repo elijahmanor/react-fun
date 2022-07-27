@@ -29,18 +29,21 @@ export default function Background({ children }) {
     return () => document.removeEventListener("keydown", handleKey);
   }, [dispatch]);
 
+	/*
+       backgroundImage: `
+		radial-gradient(circle, transparent 40%, ${
+		  isDarkMode ? "black" : "transparent"
+		} 75%),
+		linear-gradient(to right, transparent, transparent),
+		url(${cachedBackgroundUrl})
+	  `,
+	*/
   return (
     <>
       <div
         className="Background"
         style={{
-          backgroundImage: `
-            radial-gradient(circle, transparent 40%, ${
-              isDarkMode ? "black" : "transparent"
-            } 75%),
-            linear-gradient(to right, transparent, transparent),
-            url(${cachedBackgroundUrl})
-          `,
+          backgroundImage: `url(${cachedBackgroundUrl})`,
           backgroundPosition: "center center",
           backgroundSize: "cover"
         }}
