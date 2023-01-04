@@ -41,7 +41,7 @@
     "jest-resolve": "24.7.1",
     "jest-watch-typeahead": "0.3.0",
     "mdx-deck-live-code": "^1.0.1",
-    "mdx.macro": "^0.2.8",
+    "mdx.macro": "^0.2.9",
     "mermaid.cli": "^0.5.1",
     "mini-css-extract-plugin": "0.5.0",
     "optimize-css-assets-webpack-plugin": "5.0.1",
